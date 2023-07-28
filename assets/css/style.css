@@ -1,6 +1,6 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");html {
-    font-family: Courier New, Courier, monospace;
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
