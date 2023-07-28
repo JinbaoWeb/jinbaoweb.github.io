@@ -19,13 +19,15 @@
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
-
-    <header class="page-header" role="banner">
+    <header class="container-header" role="banner">
+      {% include header.html %}
+    </header>
+<!--     <header class="page-header" role="banner">
       <div class="header-info">
         <span class="header-info-name">{{ site.title }}</span>
         <span class="header-info-desc">{{ site.description }}</span>
       </div>
-    </header>
+    </header> -->
 
     <main id="content" class="main-content" role="main">
       {{ content }}
