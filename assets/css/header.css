@@ -1,7 +1,7 @@
 .container-header {
   margin:0 auto;
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
   border-bottom: solid 1px #aaa;
   overflow: hidden;
   max-width: 840px;
@@ -23,8 +23,10 @@
 }
 
 .header-main-nav {
-  list-style: none;
-  margin: 0;
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .header-main-nav-item {
@@ -32,4 +34,16 @@
   position: relative;
   float: left;
   margin: 0 10px;
+}
+
+.header-main-nav-item a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.header-main-nav-item a:hover {
+    background-color: #aaa;
 }
