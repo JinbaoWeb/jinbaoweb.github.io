@@ -2,3 +2,15 @@
   <span class="header-info-name">{{ site.title }}</span>
   <span class="header-info-desc">{{ site.description }}</span>
 </div>
+<nav class="header-nav">
+  <ul class="header-main-nav">
+    {% for item in site.data.menus %}
+    <li class="header-main-nav-item">
+      <a
+        href="{% if item.absoluteUrl != true %}{{ site.baseurl }}{% endif %}{{ item.url }}">
+        {{ item.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav>
