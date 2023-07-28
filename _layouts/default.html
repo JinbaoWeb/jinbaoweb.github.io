@@ -21,8 +21,10 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <span class="project-name">{{ site.title }}</span>
-      <span class="project-tagline">{{ site.description }}</span>
+      <div class="header-info">
+        <span class="header-info-name">{{ site.title }}</span>
+        <span class="header-info-desc">{{ site.description }}</span>
+      </div>
     </header>
 
     <main id="content" class="main-content" role="main">
@@ -39,8 +41,23 @@
   <style>
     .page-header {
       width: 100%;
-      margin: 0 auto;
-      max-width: 800px;
+      padding: 10px 0;
+      border-bottom: solid 1px #aaa;
+      overflow: hidden;
+    }
+    .header-info {
+      display: block;
+      position: relative;
+      margin: 10px;
+    }
+    
+    .header-info-name {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    
+    .header-info-desc {
+      font-size: 0.9em;
     }
   </style>
 </html>
