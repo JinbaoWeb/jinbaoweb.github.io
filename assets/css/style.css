@@ -48,7 +48,7 @@ dfn {
 }
 
 h1 {
-    font-size: 1.4em;
+    font-size: 2em;
     margin: 0.67em 0;
     text-align: center;
 }
@@ -465,7 +465,7 @@ body {
     padding: 0;
     margin: 0;
     /* font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; */
-    font-size: 16px;
+    font-size: 13px;
     line-height: 1.5;
     color: #606c71
 }
