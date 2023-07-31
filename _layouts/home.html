@@ -7,6 +7,7 @@
     </header>
 
     <main id="content" class="main-content" role="main">
+      {{ site.documents }}
       {% for document in site.documents %}
         <h2>{{ document.category }}</h2>
         {% for page in document.pages %}
