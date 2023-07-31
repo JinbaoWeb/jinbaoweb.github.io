@@ -7,11 +7,6 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      {{ site.pages }}
-      {% for page in site.pages %}
-          <a href="{{ page.url }}">{{ page.title }}</a>
-        {% endfor %}
-      {% endfor %}
       <footer class="site-footer">
         {% include footer.html %}
       </footer>
