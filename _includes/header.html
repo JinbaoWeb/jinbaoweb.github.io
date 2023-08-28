@@ -13,5 +13,10 @@
     <li class="header-main-nav-item">
       <a href="/about"><span class="fa fa-user" style="font-size:24px"></span> About</a>
     </li>
+    {% for menus in site.data.menus %}
+    <li class="header-main-nav-item">
+      <a href="{{ menus.url }}"><span class="fa fa-user" style="font-size:24px"></span> {{ menus.title }}</a>
+    </li>
+    {% endfor %}
   </ul>
 </nav>
