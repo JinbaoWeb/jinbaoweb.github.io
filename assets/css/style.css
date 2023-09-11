@@ -671,7 +671,6 @@ a:hover {
     margin-bottom: 1rem;
     font-weight: normal;
     color: #159957;
-    font-size: 1.5em;
 }
 
 .main-content h2 {
@@ -679,21 +678,18 @@ a:hover {
     margin-bottom: 1rem;
     font-weight: normal;
     color: #159957;
-    font-size: 1.3em;
 }
 
 .main-content h3 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    font-size: 1.1em;
 }
 
 .main-content h4,.main-content h5,.main-content h6 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    font-size: 1em;
 }
 
 .main-content p {
