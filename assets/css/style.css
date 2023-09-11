@@ -620,7 +620,8 @@ a:hover {
 }
 
 .main-content {
-    word-wrap: break-word
+    word-wrap: break-word;
+    font-size: 16px;
 }
 
 .main-content :first-child {
