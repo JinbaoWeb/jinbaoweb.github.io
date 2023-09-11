@@ -63,8 +63,8 @@ def Recommand(user, train, W, K):
 
 ### 2.1 ItemCF的算法流程
 
-1. 根据用户的历史行为，获取物品之间的共现矩阵$C[i][j]=|N(i) \bigcap N(j)|$
-2. 根据共现矩阵得到物品之间的相似矩阵$W[i][j]= \frac{C[i][j]}{|N(i)| * |N(j)|}$
+1. 根据用户的历史行为，获取物品之间的共现矩阵$C[i][j]= \vert N(i) \bigcap N(j) \vert$
+2. 根据共现矩阵得到物品之间的相似矩阵$W[i][j]= \frac{C[i][j]}{\vert N(i) \vert * \vert N(j) \vert}$
 3. 根据相似矩阵找到目标用户发生行为的物品列表中每个物品对应的topK个物品，并计算目标用户对每个物品对应的topK个物品的兴趣程度$p(u, i)= \sum W[i][j]$，按照兴趣程度排序推荐给目标用户
 
 ### 2.2 ItemCF的代码实现
@@ -107,11 +107,11 @@ def Recommendation(train, user_id, W, K):
 
 用户（物品）相似度的计算公式为
 $$
-w_{uv} = \frac{|N(u) \bigcap N(v)|}{\sqrt{|N(u)| |N(v)|}}
+w_{uv} = \frac{\vert N(u) \bigcap N(v) \vert}{\sqrt{\vert N(u) \vert \vert N(v) \vert}}
 $$
 相似度的计算实际上更大程度会受活跃用户（物品）的影响比较大，所以计算相似度应该活跃用户（物品）对物品的相似度的贡献应该小于不活跃的用户（物品），现引入IUF(Inverse User Frequence)，即用户（物品）活跃度对数的倒数的参数，来修正相似度，公式如下：
 $$
-w_{uv} = \frac{\sum_{i \in N(u) \bigcap N(v)} \frac{1}{log(1+|N(i)|)}}{\sqrt{|N(u)| |N(v)|}}
+w_{uv} = \frac{\sum_{i \in N(u) \bigcap N(v)} \frac{1}{log(1+ \vert N(i) \vert)}}{\sqrt{ \vert N(u) \vert \vert N(v) \vert}}
 $$
 
 ### 3.2 相似度的归一化Norm
