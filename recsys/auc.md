@@ -49,7 +49,9 @@ $$
 \end{cases}
 \end{aligned}
 $$
+
 这个计算公式也可以转化为
+
 $$
 \begin{aligned}
 AUC=\frac{\sum_{i \in \text{true sample}} rank(i) - \frac{M \times (M+1)}{2}}{M \times N} \quad \text{rank(i)表示正样本i的排序}
