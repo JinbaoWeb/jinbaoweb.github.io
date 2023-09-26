@@ -127,8 +127,8 @@ $$
 
 ## 05 参考资料
 
-- [看完这篇AUC文章，搞定任何有关AUC的面试不成问题~](https://zhuanlan.zhihu.com/p/360765777)
-- [CTR 预测理论（十五）：分类评价指标 AUC 总结（优缺点、计算公式推导）](https://blog.csdn.net/Dby_freedom/article/details/89814644)
-- [你真的理解AUC么【搜推广】](https://zhuanlan.zhihu.com/p/360572617)
-- [【推荐算法】AUC的计算方法](https://www.cnblogs.com/tmpUser/p/15092467.html)
+[1] [看完这篇AUC文章，搞定任何有关AUC的面试不成问题~](https://zhuanlan.zhihu.com/p/360765777)
+[2] [CTR 预测理论（十五）：分类评价指标 AUC 总结（优缺点、计算公式推导）](https://blog.csdn.net/Dby_freedom/article/details/89814644)
+[3] [你真的理解AUC么【搜推广】](https://zhuanlan.zhihu.com/p/360572617)
+[4] [【推荐算法】AUC的计算方法](https://www.cnblogs.com/tmpUser/p/15092467.html)
  
