@@ -1,48 +1,37 @@
 .container-header {
-  margin:0 auto;
-  width: 100%;
-  overflow: hidden;
-  max-width: 840px;
-}
-
-.header-info {
-  display: block;
-  position: relative;
-  margin: 3px 10px;
   
+  background-color: rgb(53, 171, 165);
+  border-color: #43CAC3;
+  color: #ecf0f1;
+}
+.navbar-default {
+  margin:0 auto;
+  max-width: 840px;
+  color: #ecf0f1;
+  background-color: rgb(53, 171, 165);
+  border-color: rgb(53, 171, 165);
 }
 
-.header-info-name {
-  font-size: 2em;
-  font-weight: bold;
+.navbar-default .navbar-brand {
+    font-weight: bold;
+    color: #ecf0f1;
 }
 
-.header-info-desc {
-  font-size: 0.9em;
+.navbar-nav {
+  color: #ecf0f1;
 }
 
-.header-main-nav {
-	list-style-type: none;
+.navbar-default .navbar-nav>li>a {
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ecf0f1;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav {
+    float: right;
     margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.header-main-nav-item {
-  display: block;
-  position: relative;
-  float: left;
-  margin: 0;
-}
-
-.header-main-nav-item a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.header-main-nav-item a:hover {
-    background-color: #F5F5F5;
+  }
 }
