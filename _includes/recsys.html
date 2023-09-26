@@ -1,8 +1,10 @@
-<ul>
-    <li>
-      <a href="/recsys/deepfm.html">深度模型DeepFM模型</a>
-    </li>
-    <li>
-      <a href="/recsys/wdl.html">深度模型Wide&Deep模型</a>
-    </li>
-</ul>
+<div class="article-listpage">
+    {% for article in site.data.recsys %}
+    <a href="{{ article.url }}">
+    <div class="article-container">
+        <div class="article-date">{{ article.date }}</div>
+        <div class="article-title">{{ article.title }}</div>
+    </div>
+    </a>
+    {% endfor %}
+</div>
