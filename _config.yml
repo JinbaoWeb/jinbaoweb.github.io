@@ -4,12 +4,3 @@ email: jinbaosite@163.com
 
 theme: jekyll-theme-cayman
 markdown: kramdown
-
-documents:
-  - category: RecSys
-  - pages:
-    - title: "深度模型Wide&Deep模型"
-      url: /recsys/wdl.html
-    - title: "深度模型DeepFM模型"
-      url: /recsys/deepfm.html
-    
