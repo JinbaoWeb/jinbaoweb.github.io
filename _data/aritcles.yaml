@@ -9,7 +9,7 @@
 
 - title: 推荐系统的矩阵分解
   authors: Recall
-  abstract: 将用户和物品的特征进行线性组合，并引入二次项来捕捉特征之间的交互关系
+  abstract: 将用户行为矩阵分解为两个矩阵的乘积，通过用户向量和物品向量的内积来表示用户对物品的偏好
   publishedDate: 2023/9/24
   category: recsys
   category-herf: /recsys
