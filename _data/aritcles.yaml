@@ -33,3 +33,21 @@
   category-herf: /projects
   article-href: /projects/581
   article-img: /img/返乡发展人群预测.jpg
+
+- title: 深度模型DeepFM模型
+  authors: recsys
+  abstract: 将FM算法和深度学习结合，捕捉特征之间的交互关系和高阶特征
+  publishedDate: 2023/9/27
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/deepfm
+  article-img: /img/返乡发展人群预测.jpg
+
+- title: 深度模型Wide&Deep模型
+  authors: recsys
+  abstract: 将协同过滤和深度学习结合，捕捉用户和物品的隐式联系和高阶特征
+  publishedDate: 2023/9/28
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/wdl
+  article-img: /img/返乡发展人群预测.jpg
