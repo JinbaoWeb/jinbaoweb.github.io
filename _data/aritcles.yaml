@@ -41,7 +41,7 @@
   category: recsys
   category-herf: /recsys
   article-href: /recsys/deepfm
-  article-img: /img/返乡发展人群预测.jpg
+  article-img: /img/deepfm.png
 
 - title: 深度模型Wide&Deep模型
   authors: recsys
@@ -50,4 +50,4 @@
   category: recsys
   category-herf: /recsys
   article-href: /recsys/wdl
-  article-img: /img/返乡发展人群预测.jpg
+  article-img: /img/wdl.png
