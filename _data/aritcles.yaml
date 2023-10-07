@@ -1,7 +1,7 @@
 - title: FM因子分解
   authors: Rank
   abstract: 将用户和物品的特征进行线性组合，并引入二次项来捕捉特征之间的交互关系
-  publishedDate: 2021/9/23
+  publishedDate: 2023/9/23
   category: recsys
   category-herf: /recsys
   article-href: /recsys/fm
@@ -10,8 +10,17 @@
 - title: 推荐系统的矩阵分解
   authors: Recall
   abstract: 将用户和物品的特征进行线性组合，并引入二次项来捕捉特征之间的交互关系
-  publishedDate: 2022/12/16
+  publishedDate: 2023/9/24
   category: recsys
   category-herf: /recsys
   article-href: /recsys/mf
   article-img: /img/mf.png
+
+- title: 协调过滤算法
+  authors: Recall
+  abstract: 基于用户的协同过滤算法根据用户对物品的偏好，计算用户与其他用户的相似度，根据用户的相似度，推荐与用户兴趣相似的物品。基于物品的协同过滤算法根据物品之间的相似度，推荐与用户之前喜欢的物品相似的物品
+  publishedDate: 2023/9/25
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/cf
+  article-img: /img/cf.png
