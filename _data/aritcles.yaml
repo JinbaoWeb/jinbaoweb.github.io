@@ -24,3 +24,12 @@
   category-herf: /recsys
   article-href: /recsys/cf
   article-img: /img/cf.png
+
+- title: 返乡发展人群预测
+  authors: datafountain
+  abstract: 基于中国联通的大数据能力，通过使用对联通的信令数据、通话数据、互联网行为等数据进行建模，对个人是否会返乡工作进行判断
+  publishedDate: 2023/9/26
+  category: projects
+  category-herf: /projects
+  article-href: /projects/581
+  article-img: /img/返乡发展人群预测.png
