@@ -1,0 +1,16 @@
+- title: FM因子分解
+  authors: Rank
+  abstract: 将用户和物品的特征进行线性组合，并引入二次项来捕捉特征之间的交互关系
+  publishedDate: 2021/9/23
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/fm
+  article-img: /img/mf.png
+
+- title: 推荐系统的矩阵分解
+  authors: Recall
+  abstract: 将用户和物品的特征进行线性组合，并引入二次项来捕捉特征之间的交互关系
+  publishedDate: 2022/12/16
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/mf
