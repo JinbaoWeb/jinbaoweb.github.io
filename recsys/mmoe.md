@@ -8,7 +8,7 @@
 
 ## 1 MMoE模型
 
-![MMoE](https://s3.bmp.ovh/imgs/2022/03/a28d3000bd8bb4a8.png)
+![MMoE](/img/mmoe.png)
 
 #### 1.1 `Shared-Bottom Model`
 
