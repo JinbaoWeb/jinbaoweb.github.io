@@ -55,7 +55,7 @@
 - title: 多任务模型MMoE
   authors: recsys
   abstract: 通过门控网络来学习多个专家模型的权重，提高模型的多任务学习能力
-  publishedDate: 2023/9/28
+  publishedDate: 2020/12/13
   category: recsys
   category-herf: /recsys
   article-href: /recsys/mmoe
