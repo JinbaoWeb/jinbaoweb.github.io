@@ -51,3 +51,12 @@
   category-herf: /recsys
   article-href: /recsys/wdl
   article-img: /img/wdl.png
+
+- title: 多任务模型MMoE
+  authors: recsys
+  abstract: 通过门控网络来学习多个专家模型的权重，提高模型的多任务学习能力
+  publishedDate: 2023/9/28
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/mmoe
+  article-img: /img/mmoe.png
