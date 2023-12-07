@@ -100,6 +100,52 @@ def matrix_factorization_sgd(R, K, learning_rate, epochs):
 
 ALS跟SGD都是需要优化目标函数$loss$，ALS先初始化固定其中一个变量$q_i$，然后通过对$p_u$求导反复迭代得到$p_u$的解，然后固定$p_u$，再对$q_i$求导反复迭代得到$q_i$的解；如此交替执行直到$loss$满足阈值条件或者到达迭代次数上限为止。
 
+代码实现
+```python
+import numpy as np
+
+def matrix_factorization_als(R, K, epochs, lambda_reg):
+    """
+    Matrix Factorization with ALS for Recommender Systems.
+
+    Parameters:
+    - R: User-Item interaction matrix (ratings matrix)
+    - K: Number of latent factors
+    - epochs: Number of training epochs
+    - lambda_reg: Regularization term
+
+    Returns:
+    - P: User matrix
+    - Q: Item matrix
+    """
+
+    num_users, num_items = R.shape
+
+    # Initialize user and item matrices with random values
+    P = np.random.rand(num_users, K)
+    Q = np.random.rand(num_items, K)
+
+    for epoch in range(epochs):
+        # Update user matrix P
+        for i in range(num_users):
+            A = np.dot(Q.T, np.dot(np.diag(R[i, :]), Q)) + lambda_reg * np.eye(K)
+            V = np.dot(Q.T, np.multiply(R[i, :], R[i, :]))
+            P[i, :] = np.linalg.solve(A, V)
+
+        # Update item matrix Q
+        for j in range(num_items):
+            A = np.dot(P.T, np.dot(np.diag(R[:, j]), P)) + lambda_reg * np.eye(K)
+            V = np.dot(P.T, np.multiply(R[:, j], R[:, j]))
+            Q[j, :] = np.linalg.solve(A, V)
+
+        # Compute loss (optional)
+        loss = np.sum(np.multiply(R - np.dot(P, Q.T), R - np.dot(P, Q.T))) + \
+               lambda_reg * (np.sum(np.square(P)) + np.sum(np.square(Q)))
+        print(f"Epoch {epoch + 1}/{epochs}, Loss: {loss}")
+
+    return P, Q
+```
+
 
 ## 3 矩阵分解的优缺点
 
