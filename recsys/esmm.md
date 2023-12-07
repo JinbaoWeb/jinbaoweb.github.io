@@ -46,6 +46,39 @@ $$
 loss = loss_{ctr} + \lambda * loss_{ctcvr}
 $$
 
+## 2 代码实现
+
+```python
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Embedding, Dense, Concatenate, Flatten
+from tensorflow.keras.models import Model
+
+class ESMM(tf.keras.Model):
+    def __init__(self, feature_dim, embedding_dim, hidden_units, num_tasks):
+        super(ESMM, self).__init__()
+        # Embedding layers
+        self.embedding_layer = Embedding(input_dim=feature_dim, output_dim=embedding_dim)
+        # Dense layers for task-specific processing
+        self.task_dense_layers = [Dense(units, activation='relu') for _ in range(num_tasks)]
+        # Output layers for each task
+        self.output_layers = [Dense(1, activation='sigmoid', name=f'task_{i+1}_output') for i in range(num_tasks)]
+
+    def call(self, inputs):
+        # Input layer
+        input_layer = Input(shape=(inputs,))
+        # Shared embedding layer
+        embedding_output = self.embedding_layer(input_layer)
+        flattened_embedding = Flatten()(embedding_output)
+        # Task-specific processing
+        task_outputs = []
+        for dense_layer in self.task_dense_layers:
+            task_output = dense_layer(flattened_embedding)
+            task_outputs.append(task_output)
+        # Output layers for each task
+        outputs = [output_layer(task_output) for output_layer, task_output in zip(self.output_layers, task_outputs)]
+        return outputs
+```
+
 ## 2 参考资料
 
 [1] [Entire Space Multi-Task Model: An Effective Approach for Estimating Post-Click Conversion Rate](https://arxiv.org/pdf/1804.07931.pdf)
