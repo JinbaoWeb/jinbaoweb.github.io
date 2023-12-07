@@ -159,6 +159,55 @@ class MMoE(Layer):
         return outputs
 ```
 
+简化版实现
+```python
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Dense, Concatenate
+from tensorflow.keras.models import Model
+
+class MMOE(tf.keras.Model):
+    def __init__(self, num_experts, num_tasks, hidden_units):
+        super(MMOE, self).__init__()
+
+        # Shared bottom layer
+        self.shared_layer = Dense(units=hidden_units[0], activation='relu')
+
+        # Expert layers
+        self.expert_layers = [Dense(units=hidden_units[1], activation='relu') for _ in range(num_experts)]
+
+        # Gate layers
+        self.gate_layers = [Dense(units=num_experts, activation='softmax') for _ in range(num_tasks)]
+
+        # Output layers for each task
+        self.output_layers = [Dense(units=1, activation='sigmoid') for _ in range(num_tasks)]
+
+    def call(self, inputs):
+        # Input layer
+        input_layer = Input(shape=(inputs,))
+
+        # Shared bottom layer
+        shared_output = self.shared_layer(input_layer)
+
+        # Expert and gate layers
+        expert_outputs, gate_outputs = [], []
+        for expert_layer, gate_layer in zip(self.expert_layers, self.gate_layers):
+            expert_output = expert_layer(shared_output)
+            expert_outputs.append(expert_output)
+
+            gate_output = gate_layer(shared_output)
+            gate_outputs.append(gate_output)
+
+        # Mixture of experts
+        expert_outputs = Concatenate()(expert_outputs)
+        gate_outputs = Concatenate()(gate_outputs)
+        expert_outputs = tf.keras.layers.Multiply()([gate_outputs, expert_outputs])
+
+        # Output layers for each task
+        task_outputs = [output_layer(expert_outputs) for output_layer in self.output_layers]
+
+        return task_outputs
+```
+
 ## 3 参考资料
 
 [1] [多任务学习之MMOE模型](https://zhuanlan.zhihu.com/p/145288000)
