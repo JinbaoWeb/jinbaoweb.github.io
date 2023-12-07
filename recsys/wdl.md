@@ -60,46 +60,48 @@ Wide&Deep模型训练方式采用的是联合训练，直接在训练阶段就�
 ## 03 Wide&Deep模型实现
 
 ```python
-def create_model_inputs():
-    inputs = {}
-    for feature_name in FEATURE_NAMES:
-        inputs[feature_name] = layers.Input(shape=(1,), name=feature_name)
-    return inputs
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Embedding, Dense, Concatenate, Flatten
+from tensorflow.keras.models import Model
 
-def encode_inputs(inputs, use_embedding=False):
-    encoded_features = []
-    for feature_name in inputs:
-        if feature_name in CATEGORICAL_FEATURE_NAMES:
-            vocabulary_size = \
-            len(CATEGORICAL_FEATURES_WITH_VOCABULARY[feature_name]) \+ 1
-            if use_embedding:
-                embedding_dims = int(math.sqrt(vocabulary_size))
-            else:
-                embedding_dims = 1
-            x = layers.Embedding(vocabulary_size,
-                                 embedding_dims)(inputs[feature_name])
-            encoded_features.append(x)
-        if feature_name in NUMERIC_FEATURE_NAMES:
-            encoded_features.append(inputs[feature_name])
-    return layers.Concatenate()(encoded_features)
-    
-def create_wide_and_deep_model():
+class WideDeepModel(tf.keras.Model):
+    def __init__(self, feature_dim, embedding_dim, hidden_units):
+        super(WideDeepModel, self).__init__()
 
-    inputs = create_model_inputs()
-    wide = encode_inputs(inputs)
-    wide = layers.BatchNormalization()(wide)
+        # Wide Component
+        self.wide_layer = Dense(1, activation='sigmoid')
 
-    deep = encode_inputs(inputs, use_embedding=True)
-    for units in hidden_units:
-        deep = layers.Dense(units)(deep)
-        deep = layers.BatchNormalization()(deep)
-        deep = layers.ReLU()(deep)
-        deep = layers.Dropout(dropout_rate)(deep)
+        # Deep Component
+        self.embedding_layer = Embedding(input_dim=feature_dim, output_dim=embedding_dim)
+        self.flatten = Flatten()
+        self.dense_layers = [Dense(units, activation='relu') for units in hidden_units]
 
-    merged = layers.concatenate([wide, deep])
-    outputs = layers.Dense(units=1, activation="sigmoid")(merged)
-    model = keras.Model(inputs=inputs, outputs=outputs)
-    return model
+        # Concatenate Wide and Deep
+        self.concat = Concatenate()
+
+        # Output Layer
+        self.output_layer = Dense(1, activation='sigmoid')
+
+    def call(self, inputs):
+        # Input Layer
+        input_layer = Input(shape=(inputs,))
+
+        # Wide Component
+        wide_output = self.wide_layer(input_layer)
+
+        # Deep Component
+        embedding_output = self.embedding_layer(input_layer)
+        deep_output = self.flatten(embedding_output)
+        for dense_layer in self.dense_layers:
+            deep_output = dense_layer(deep_output)
+
+        # Concatenate Wide and Deep
+        concat_output = self.concat([wide_output, deep_output])
+
+        # Output Layer
+        output = self.output_layer(concat_output)
+
+        return output
 ```
 
 ## 04 参考资料
