@@ -29,7 +29,7 @@ swing算法的具体实现可以分为以下几个步骤：
 2. 计算共现频率
 共现频率可以用以下公式来计算：
 $f(i, j) = \sum_{u \in U} I(u \in R_i \cap R_j)$
-其中，$f(i,j)$ 表示物品 $i$ 和 $j$ 的共现频率， $U$  表示用户集合， $R_i$ 表示用户 $u$  喜欢的物品集合， $I(x)$ 表示逻辑函数，如果 $x$  为真，则 $I(x)=1$ ，否则 $I(x)=0$ 。
+其中，$f(i,j)$表示物品$i$和$j$的共现频率，$U$表示用户集合，$R_i$表示用户$u$喜欢的物品集合，$I(x)$表示逻辑函数，如果$x$为真，则$I(x)=1$，否则$I(x)=0$。
 
 ```python
 def compute_cooccurrence_frequency(user_item_matrix):
@@ -52,8 +52,8 @@ def compute_cooccurrence_frequency(user_item_matrix):
 
 3. 计算用户相关性
 用户相关性可以用以下公式来计算：
- $sim(u, v) = \frac{\sum_{i \in I} x_i(u) x_i(v)}{\sqrt{\sum_{i \in I} x_i(u)^2 \sum_{i \in I} x_i(v)^2}}$ 
-其中， $sim(u,v)$ 表示用户 $u$ 和 $v$ 的相关性， $I$ 表示物品集合， $x_i(u)$ 表示用户 $u$ 对物品 $i$ 的喜好程度。
+$sim(u, v) = \frac{\sum_{i \in I} x_i(u) x_i(v)}{\sqrt{\sum_{i \in I} x_i(u)^2 \sum_{i \in I} x_i(v)^2}}$
+其中，$sim(u,v)$表示用户$u$和$v$的相关性，$I$表示物品集合，$x_i(u)$表示用户$u$对物品$i$的喜好程度。
 
 ```python
 def compute_user_similarity(user_item_matrix):
@@ -74,8 +74,8 @@ def compute_user_similarity(user_item_matrix):
 
 4. 计算物品相似度
 物品相似度可以用以下公式来计算：
- $sim(i, j) = \frac{f(i, j)}{\sum_{v \in U} sim(u, v) f(i, v)}$ 
-其中， $sim(i,j)$ 表示物品 $i$ 和 $j$ 的相似度， $U$ 表示用户集合。
+$sim(i, j) = \frac{f(i, j)}{\sum_{v \in U} sim(u, v) f(i, v)}$
+其中，$sim(i,j)$表示物品$i$和$j$的相似度，$U$表示用户集合。
 
 ```python
 def compute_item_similarity(user_item_matrix, user_similarity):
@@ -102,9 +102,9 @@ def compute_item_similarity(user_item_matrix, user_similarity):
 
 5. swing算法的参数调优
 swing算法有两个主要参数：
- $k$ ：表示用户相关性计算时的邻居数。
- $λ$ ：表示物品相似度计算时的权重系数。
- $k$ 的取值越大，则用户相关性越准确，但计算复杂度也越高。 $λ$ 的取值越大，则物品相似度越强调用户相关性，但对共现频率的依赖性越弱。
+$k$：表示用户相关性计算时的邻居数。
+$λ$：表示物品相似度计算时的权重系数。
+$k$的取值越大，则用户相关性越准确，但计算复杂度也越高。$λ$的取值越大，则物品相似度越强调用户相关性，但对共现频率的依赖性越弱。
 在实际使用中，可以通过实验来调优这两个参数，以获得最佳的召回效果。
 
 ## 4 总结
