@@ -42,27 +42,43 @@ FM算法的缺点也非常明显，只扩展了二阶特征交叉，没办法进
 
 基于tensorflow/keras的实现
 ```
-class FM_Layer(Layer):
-    def __init__(self, layer_name="fm"):
-        self.layer_name = layer_name
-        super(FM_Layer, self).__init__()
+import tensorflow as tf
+from tensorflow.keras.layers import Input, Embedding, Dense, Flatten, Concatenate
+from tensorflow.keras.models import Model
 
-    def call(self, inputs, training=None, mask=None):
-        summed_features_emb = tf.reduce_sum(inputs, 1)
-        summed_features_emb_square = tf.square(summed_features_emb)
-        squared_features_emb = tf.square(inputs)
-        squared_sum_features_emb = tf.reduce_sum(squared_features_emb, 1)
-        fm_output = 0.5 * (tf.subtract(summed_features_emb_square,
-                                       squared_sum_features_emb))
-        y_fm = tf.reduce_sum(fm_output, axis=-1, keepdims=True)
-        return y_fm
+class FMLayer(tf.keras.layers.Layer):
+    def __init__(self, num_factors, **kwargs):
+        super(FMLayer, self).__init__(**kwargs)
+        self.num_factors = num_factors
+
+    def build(self, input_shape):
+        num_features = input_shape[1]
+        self.V = self.add_weight(name='V', shape=(num_features, self.num_factors),
+                                 initializer='random_normal', trainable=True)
+
+    def call(self, inputs):
+        linear_terms = tf.reduce_sum(tf.matmul(inputs, tf.expand_dims(self.V, axis=0)), axis=1)
+        pairwise_interactions = 0.5 * (tf.reduce_sum(tf.pow(tf.matmul(inputs, tf.transpose(self.V)), 2), axis=1)
+                                      - tf.reduce_sum(tf.matmul(tf.pow(inputs, 2), tf.transpose(tf.pow(self.V, 2))), axis=1))
+        return linear_terms + pairwise_interactions
+
+# Define FM model using Keras
+def build_fm_model(num_features, num_factors):
+    inputs = Input(shape=(num_features,))
+    embedding_layer = Embedding(input_dim=2, output_dim=num_factors, input_length=num_features)(inputs)
+    flatten_layer = Flatten()(embedding_layer)
+    fm_layer = FMLayer(num_factors)(inputs)
+
+    output_layer = Dense(1, activation='sigmoid')(fm_layer)
+
+    model = Model(inputs=inputs, outputs=output_layer)
+    return model
 ```
 
----
 
 ## 3 参考资料
 
-[1] 《深度学习推荐系统》
-[2] [FM因子分解机的原理、公式推导、Python实现和应用](https://zhuanlan.zhihu.com/p/145436595)
-[3] [因子分解机（Factorization Machine）详解（一）](https://blog.csdn.net/lijingru1/article/details/88623136)
-[4] [【推荐系统】Factorization Machine](https://zhuanlan.zhihu.com/p/80726100)
+[1] 《深度学习推荐系统》  
+[2] [FM因子分解机的原理、公式推导、Python实现和应用](https://zhuanlan.zhihu.com/p/145436595)  
+[3] [因子分解机（Factorization Machine）详解（一）](https://blog.csdn.net/lijingru1/article/details/88623136)  
+[4] [【推荐系统】Factorization Machine](https://zhuanlan.zhihu.com/p/80726100)  
