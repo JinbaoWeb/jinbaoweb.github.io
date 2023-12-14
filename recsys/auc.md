@@ -1,6 +1,6 @@
 # 二分类评估指标:AUC
 
-## 00 序言
+## 引言
 
 介绍AUC之前先了解一些基本的指标定义
 
@@ -25,7 +25,7 @@
 
 ---
 
-## 01 AUC指标的定义
+## AUC指标的定义
 
 **AUC: Area Under ROC Curve，即ROC曲线下的面积**
 
@@ -35,7 +35,7 @@ AUC的另一个定义：**随机从正样本和负样本中各选一个，分类
 
 ---
 
-## 02 AUC指标的计算
+## AUC指标的计算
 
 AUC指标的计算通常可以根据第二个定义来计算
 
@@ -95,7 +95,7 @@ from
 
 ---
 
-## 03 AUC的优缺点
+## AUC的优缺点
 
 优点：
 
@@ -109,7 +109,7 @@ from
 
 ---
 
-## 04 AUC的改进GAUC
+## AUC的改进GAUC
 
 AUC指标反应的整体的排序能力，但有的时候需要从更加细粒度的维度去看模型的排序能力，所以引入GAUC这个指标
 
@@ -127,11 +127,7 @@ $$
 
 ## 05 参考资料
 
-[1] [看完这篇AUC文章，搞定任何有关AUC的面试不成问题~](https://zhuanlan.zhihu.com/p/360765777)
-
-[2] [CTR 预测理论（十五）：分类评价指标 AUC 总结（优缺点、计算公式推导）](https://blog.csdn.net/Dby_freedom/article/details/89814644)
-
-[3] [你真的理解AUC么【搜推广】](https://zhuanlan.zhihu.com/p/360572617)
-
-[4] [【推荐算法】AUC的计算方法](https://www.cnblogs.com/tmpUser/p/15092467.html)
- 
+[1] [看完这篇AUC文章，搞定任何有关AUC的面试不成问题~](https://zhuanlan.zhihu.com/p/360765777)  
+[2] [CTR 预测理论（十五）：分类评价指标 AUC 总结（优缺点、计算公式推导）] (https://blog.csdn.net/Dby_freedom/article/details/89814644)  
+[3] [你真的理解AUC么【搜推广】](https://zhuanlan.zhihu.com/p/360572617)  
+[4] [【推荐算法】AUC的计算方法](https://www.cnblogs.com/tmpUser/p/15092467.html)  
