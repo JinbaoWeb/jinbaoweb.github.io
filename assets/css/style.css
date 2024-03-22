@@ -1,6 +1,6 @@
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");html {
-    font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,Oxygen,Ubuntu,Cantarell,open sans,helvetica neue,sans-serif;
+    font-family: Georgia, serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -99,7 +99,6 @@ pre {
 }
 
 code,kbd,pre,samp {
-/*     font-family: monospace, monospace; */
     font-size: 1em
 }
 
@@ -464,8 +463,6 @@ td,th {
 body {
     padding: 0;
     margin: 0;
-/*     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif; */
-/*     font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; */
     font-size: 14px;
     line-height: 1.5;
 }
@@ -702,7 +699,6 @@ a:hover {
 
 .main-content code {
     padding: 2px 4px;
-/*     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace; */
     color: #567482;
     background-color: #f3f6fa;
     border-radius: 0.3rem
