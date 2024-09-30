@@ -1,3 +1,12 @@
+- title: Scaling User Modeling: Large-scale Online User Representations for Ads Personalization in Meta
+  authors: Rank
+  abstract: SUM是一个由Meta开发的大型在线用户表示框架，用于个性化广告，通过在多个广告排名模型间高效共享用户嵌入来提升广告的相关性和基础设施效率。
+  publishedDate: 2024/9/30
+  category: recsys
+  category-herf: /recsys
+  article-href: /recsys/sum
+  article-img: /img/17274075865735.png
+
 - title: FM因子分解
   authors: Rank
   abstract: 将用户和物品的特征进行线性组合，并引入二次项来捕捉特征之间的交互关系
