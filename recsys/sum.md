@@ -62,8 +62,8 @@ $$
 - 带注意力的点压缩（Dot Compression with Attention）：压缩成对点积矩阵是提高模型容量和效率的有效方法.我们结合了高级点压缩、注意力和残差连接来学习高级显式表示，公式如下：
 
 $$
-Y = MLP(Concat(LC(X_{dense}), LC(X))) \newline
-X = MLP'(Concat(LC'(X_{dense}), LC'(X))) \newline
+Y = MLP(Concat(LC(X_{dense}), LC(X))) \\
+X = MLP'(Concat(LC'(X_{dense}), LC'(X))) \\
 output = X(X^TY + Z)
 $$
 
@@ -78,7 +78,7 @@ $$
 - MLP-Mixer：是一种全MLP架构，最初是为计算机视觉设计的。这种架构可以被视为一种独特的CNN，它使用$1 \times 1$的卷积进行通道混合，以及单通道深度卷积进行标记混合，如方程如下所示：
 
 $$
-Y = X + W_2 \cdot ReLU(W_1 \cdot LayerNorm(X)^T)^T \newline
+Y = X + W_2 \cdot ReLU(W_1 \cdot LayerNorm(X)^T)^T \\
 Z = Y + W_4 \cdot ReLU(W_3 \cdot LayerNorm(Y))
 $$
 
