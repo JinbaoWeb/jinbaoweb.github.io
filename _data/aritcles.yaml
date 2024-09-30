@@ -1,4 +1,4 @@
-- title: SUM
+- title: "Scaling User Modeling: Large-scale Online User Representations for Ads Personalization in Meta"
   authors: Rank
   abstract: SUM是一个由Meta开发的大型在线用户表示框架，用于个性化广告，通过在多个广告排名模型间高效共享用户嵌入来提升广告的相关性和基础设施效率。
   publishedDate: 2024/9/30
