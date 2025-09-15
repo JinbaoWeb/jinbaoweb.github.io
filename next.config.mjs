@@ -4,10 +4,11 @@ import withMDX from "@next/mdx"({
 
 const nextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx"],
-  output: "export", // 静态导出，适配 GitHub Pages
+  output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true, // GitHub Pages 无法优化图片
   },
 };
 
-export default withMDX(nextConfig);
+export default nextConfig;
