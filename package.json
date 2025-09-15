@@ -1,11 +1,9 @@
 {
-  "name": "jinbaoweb.github.io",
+  "name": "jinbaoweb-github-io",
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
-    "start": "next start",
-    "deploy": "next build && next export && touch out/.nojekyll && git add . && git commit -m 'deploy' && git push origin gh-pages"
+    "build": "next build && next export"
   },
   "dependencies": {
     "@next/mdx": "^14.2.0",
@@ -16,3 +14,4 @@
     "tailwindcss": "^3.4.3"
   }
 }
+
