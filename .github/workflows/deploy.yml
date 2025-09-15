@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout source repo
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build & Export static site
+      - name: Build & Export Next.js static site
         run: npm run build
 
       - name: Deploy to GitHub Pages
@@ -28,3 +28,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
+          publish_branch: main
+          force_orphan: true
