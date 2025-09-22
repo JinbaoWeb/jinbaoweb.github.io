@@ -14,33 +14,45 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 2. 设置 Node.js 环境（自动识别 npm/yarn/pnpm）
+      # 2. 设置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'auto'   # 会自动根据锁文件选择 npm/yarn/pnpm 缓存
 
-      # 3. 安装依赖
+      # 3. 缓存依赖 (npm/yarn/pnpm 自动识别)
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ~/.yarn
+            ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      # 4. 安装依赖
       - name: Install dependencies
         run: |
           if [ -f package-lock.json ]; then
             npm ci
           elif [ -f yarn.lock ]; then
+            npm install -g yarn
             yarn install --frozen-lockfile
           elif [ -f pnpm-lock.yaml ]; then
             npm install -g pnpm
             pnpm install --frozen-lockfile
           else
-            echo "No lock file found. Installing with npm..."
+            echo "⚠️ 没有找到锁文件，使用 npm install"
             npm install
           fi
 
-      # 4. 构建 VuePress 静态文件
+      # 5. 构建 VuePress 静态文件
       - name: Build
         run: npm run build
 
-      # 5. 部署到 gh-pages 分支
+      # 6. 部署到 gh-pages 分支
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
