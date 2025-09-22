@@ -1,15 +1,17 @@
 {
-  "name": "my-vuepress-blog",
+  "name": "jinbaoweb",
   "version": "1.0.0",
+  "description": "个人学习博客网站",
+  "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
-    "deploy": "bash deploy.sh"
-  },
-  "dependencies": {
-    "vuepress": "^2.0.0-rc.15"
+    "docs:build": "vuepress build docs",
+    "docs:clean-dev": "vuepress dev docs --clean-cache",
+    "docs:dev": "vuepress dev docs"
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0"
-  }
+    "@vuepress/plugin-docsearch": "^2.0.0-beta.45",
+    "vuepress": "^2.0.0-beta.38",
+    "vuepress-theme-hope": "^2.0.0-beta.36"
+  },
+  "dependencies": {}
 }
