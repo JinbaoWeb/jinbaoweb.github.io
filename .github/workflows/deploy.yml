@@ -14,16 +14,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 2. 设置 Node.js 环境
+      # 2. 设置 Node.js 环境（自动识别 npm/yarn/pnpm）
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
+          cache: 'auto'   # 会自动根据锁文件选择 npm/yarn/pnpm 缓存
 
       # 3. 安装依赖
       - name: Install dependencies
-        run: npm install
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          elif [ -f yarn.lock ]; then
+            yarn install --frozen-lockfile
+          elif [ -f pnpm-lock.yaml ]; then
+            npm install -g pnpm
+            pnpm install --frozen-lockfile
+          else
+            echo "No lock file found. Installing with npm..."
+            npm install
+          fi
 
       # 4. 构建 VuePress 静态文件
       - name: Build
