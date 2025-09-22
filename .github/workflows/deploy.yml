@@ -1,61 +1,57 @@
-name: Deploy VuePress site to GitHub Pages
+name: docs
 
 on:
+  # 每当 push 到 main 分支时触发部署
   push:
-    branches:
-      - main   # 监听 main 分支推送
+    branches: [main,master]
+  # 手动触发部署
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  docs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 拉取仓库代码
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      # 2. 设置 Node.js 环境
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
         with:
-          node-version: '18'
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0
 
-      # 3. 缓存依赖 (npm/yarn/pnpm 自动识别)
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          # 选择要使用的 node 版本
+          node-version: '14'
+
+      # 缓存 node_modules
       - name: Cache dependencies
         uses: actions/cache@v3
+        id: yarn-cache
         with:
           path: |
-            ~/.npm
-            ~/.yarn
-            ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-
+            ${{ runner.os }}-yarn-
 
-      # 4. 安装依赖
+      # 如果缓存没有命中，安装依赖
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          elif [ -f yarn.lock ]; then
-            npm install -g yarn
-            yarn install --frozen-lockfile
-          elif [ -f pnpm-lock.yaml ]; then
-            npm install -g pnpm
-            pnpm install --frozen-lockfile
-          else
-            echo "⚠️ 没有找到锁文件，使用 npm install"
-            npm install
-          fi
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
 
-      # 5. 构建 VuePress 静态文件
-      - name: Build
-        run: npm run build
+      # 运行构建脚本
+      - name: Build VuePress site
+        run: yarn docs:build
 
-      # 6. 部署到 gh-pages 分支
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
         with:
-          github_token: ${{ secrets.G_TOKEN }}
-          publish_dir: docs/.vuepress/dist
-          publish_branch: gh-pages
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为 VuePress 的默认输出目录
+          build_dir: docs/.vuepress/dist
+        env:
+          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
