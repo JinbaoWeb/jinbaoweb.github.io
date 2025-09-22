@@ -1,0 +1,15 @@
+{
+  "name": "my-vuepress-blog",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
+  },
+  "dependencies": {
+    "vuepress": "^2.0.0-rc.15"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
+  }
+}
