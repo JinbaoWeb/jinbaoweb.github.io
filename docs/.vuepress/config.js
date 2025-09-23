@@ -1,5 +1,5 @@
 export default {
-  title: "我的文档站点",
+  title: "JinbaoWeb",
   description: "基于 VitePress 构建",
   themeConfig: {
     nav: [
