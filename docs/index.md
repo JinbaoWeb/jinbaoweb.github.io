@@ -1,6 +1,9 @@
-# 欢迎来到我的博客 👋
+# 首页
 
-这里记录我的随想与笔记。
+## Recsys
 
-- [第一篇文章](/blog/first-post.md)
-- [第二篇文章](/blog/second-post.md)
+- [FM因子分解机](/recsys/fm)
+- [协同过滤算法](/recsys/cf)
+- [深度模型Wide&Deep模型](/recsys/wdl)
+- [深度模型DeepFM模型](recsys/deepfm)
+
