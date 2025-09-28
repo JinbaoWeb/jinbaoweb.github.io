@@ -41,6 +41,7 @@ FM算法的缺点也非常明显，只扩展了二阶特征交叉，没办法进
 ## 2 FM实现
 
 基于tensorflow/keras的实现
+::: details 点我查看代码
 ```
 class FM_Layer(Layer):
     def __init__(self, layer_name="fm"):
@@ -57,7 +58,7 @@ class FM_Layer(Layer):
         y_fm = tf.reduce_sum(fm_output, axis=-1, keepdims=True)
         return y_fm
 ```
-
+:::
 ---
 
 ## 3 参考资料
