@@ -10,6 +10,9 @@ export default {
     sidebar: []
   },
   markdown: {
-    math: true
+    async config(md) {
+      const mathjax3 = (await import('https://unpkg.com/markdown-it-mathjax3@5.1.0/index.js')).default
+      md.use(mathjax3)
+    }
   }
 }
