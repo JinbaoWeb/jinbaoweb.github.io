@@ -4,6 +4,7 @@ export default {
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
+      { text: "Recsys", link: "/recsys" },
       { text: "关于", link: "/" }
     ],
     sidebar: []
