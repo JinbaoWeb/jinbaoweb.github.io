@@ -8,5 +8,8 @@ export default {
       { text: "关于", link: "/" }
     ],
     sidebar: []
+  },
+  markdown: {
+    math: true
   }
 }
