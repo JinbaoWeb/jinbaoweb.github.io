@@ -1,5 +1,3 @@
-# 首页
-
 ## Recsys
 
 - [FM因子分解机](/recsys/fm)
