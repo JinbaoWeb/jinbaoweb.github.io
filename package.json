@@ -2,8 +2,9 @@
   "name": "my-docs",
   "private": true,
   "scripts": {
+    "meta": "node scripts/genMeta.js",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:build": "npm run meta && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
