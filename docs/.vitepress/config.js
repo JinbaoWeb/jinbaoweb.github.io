@@ -15,7 +15,7 @@ export default {
   title: "JinbaoWeb",
   description: "Learning by Doing",
   themeConfig: {
-	siteTitle: 'Jinbao'
+	siteTitle: 'Jinbao',
 	logo: '/favicon.ico',
     nav: [
       { text: "首页", link: "/" },
