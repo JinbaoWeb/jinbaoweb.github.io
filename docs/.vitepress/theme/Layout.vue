@@ -1,94 +1,96 @@
 <template>
-  <!-- Use default VitePress Layout for header / nav, inject our homepage content into its default slot -->
+  <!-- Render differently depending on route: if homepage, show custom homepage content inside DefaultTheme Layout's slot; otherwise render DefaultTheme unchanged (pass through page slot) -->
   <component :is="DefaultLayout">
     <template #default>
-      <div class="vp-container">
-        <!-- Homepage hero + sections shown only on root -->
-        <main>
-          <section v-if="isHome && cfg.showHome" class="hero">
-            <div class="hero-left">
-              <h2 v-html="cfg.heroTitle"></h2>
-              <p class="muted">{{ cfg.heroSubtitle }}</p>
+      <div v-if="isHome">
+        <div class="vp-container">
+          <!-- Homepage hero + sections -->
+          <main>
+            <section class="hero">
+              <div class="hero-left">
+                <h2 v-html="cfg.heroTitle"></h2>
+                <p class="muted">{{ cfg.heroSubtitle }}</p>
 
-              <div class="hero-cta">
-                <a class="pill" :href="cfg.ctaLinks.posts">{{ cfg.ctaLabels.posts }}</a>
-                <a class="pill" :href="cfg.ctaLinks.projects">{{ cfg.ctaLabels.projects }}</a>
-                <a class="pill" :href="cfg.ctaLinks.topics">{{ cfg.ctaLabels.topics }}</a>
-              </div>
+                <div class="hero-cta">
+                  <a class="pill" :href="cfg.ctaLinks.posts">{{ cfg.ctaLabels.posts }}</a>
+                  <a class="pill" :href="cfg.ctaLinks.projects">{{ cfg.ctaLabels.projects }}</a>
+                  <a class="pill" :href="cfg.ctaLinks.topics">{{ cfg.ctaLabels.topics }}</a>
+                </div>
 
-              <div class="hot-tags">
-                <div class="muted">热门标签：</div>
-                <div class="tags">
-                  <span v-for="t in cfg.hotTags" :key="t" class="tag-pill">{{ t }}</span>
+                <div class="hot-tags">
+                  <div class="muted">热门标签：</div>
+                  <div class="tags">
+                    <span v-for="t in cfg.hotTags" :key="t" class="tag-pill">{{ t }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <aside class="hero-right">
-              <div class="hero-card">
-                <div class="top">
-                  <div class="tag">热门系列</div>
-                  <div class="meta">{{ cfg.seriesCountText }}</div>
+              <aside class="hero-right">
+                <div class="hero-card">
+                  <div class="top">
+                    <div class="tag">热门系列</div>
+                    <div class="meta">{{ cfg.seriesCountText }}</div>
+                  </div>
+                  <div class="big-title">{{ cfg.featureSeries.title }}</div>
+                  <div class="meta">{{ cfg.featureSeries.desc }}</div>
+                  <div class="hero-foot">
+                    <div class="meta">最新更新：<strong>{{ cfg.featureSeries.updated }}</strong></div>
+                  </div>
                 </div>
-                <div class="big-title">{{ cfg.featureSeries.title }}</div>
-                <div class="meta">{{ cfg.featureSeries.desc }}</div>
-                <div class="hero-foot">
-                  <div class="meta">最新更新：<strong>{{ cfg.featureSeries.updated }}</strong></div>
-                </div>
+              </aside>
+            </section>
+
+            <!-- Latest posts -->
+            <section id="posts" class="section">
+              <h3>最新文章</h3>
+              <div class="posts">
+                <article class="post" v-for="p in posts" :key="p.title">
+                  <div class="title">{{ p.title }}</div>
+                  <div class="meta">{{ p.date }} · 阅读 {{ p.read || '—' }}</div>
+                  <p class="excerpt">{{ p.excerpt }}</p>
+                  <div class="tags">
+                    <span class="tag-pill" v-for="t in p.tags || []" :key="t">{{ t }}</span>
+                  </div>
+                </article>
               </div>
-            </aside>
-          </section>
+            </section>
 
-          <!-- Latest posts -->
-          <section v-if="isHome && cfg.showHome" id="posts" class="section">
-            <h3>最新文章</h3>
-            <div class="posts">
-              <article class="post" v-for="p in posts" :key="p.title">
-                <div class="title">{{ p.title }}</div>
-                <div class="meta">{{ p.date }} · 阅读 {{ p.read || '—' }}</div>
-                <p class="excerpt">{{ p.excerpt }}</p>
-                <div class="tags">
-                  <span class="tag-pill" v-for="t in p.tags || []" :key="t">{{ t }}</span>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <!-- Topics + sidebar -->
-          <section v-if="isHome && cfg.showHome" id="topics" class="section topics">
-            <div class="topics-list">
-              <div v-for="topic in cfg.topics" :key="topic.title" class="card">
-                <h4>{{ topic.title }}</h4>
-                <p class="muted">{{ topic.desc }}</p>
-              </div>
-            </div>
-
-            <aside class="aside">
-              <h4>订阅与更新</h4>
-              <div class="muted">获取最新文章与项目更新（每月邮件汇总）。</div>
-              <div class="subscribe" id="subscribe">
-                <input v-model="email" placeholder="邮箱地址" />
-                <button @click="doSubscribe">订阅</button>
-              </div>
-
-              <div class="quick-links" style="margin-top:18px">
-                <h4>快速入口</h4>
-                <div v-for="link in cfg.quickLinks" :key="link.text" style="margin-top:8px">
-                  <a :href="link.href" class="nav-link">{{ link.text }}</a>
+            <!-- Topics + sidebar -->
+            <section id="topics" class="section topics">
+              <div class="topics-list">
+                <div v-for="topic in cfg.topics" :key="topic.title" class="card">
+                  <h4>{{ topic.title }}</h4>
+                  <p class="muted">{{ topic.desc }}</p>
                 </div>
               </div>
-            </aside>
-          </section>
 
-          <!-- Render page content (Markdown pages) after/home alongside hero -->
-          <section class="page-slot">
-            <slot />
-          </section>
+              <aside class="aside">
+                <h4>订阅与更新</h4>
+                <div class="muted">获取最新文章与项目更新（每月邮件汇总）。</div>
+                <div class="subscribe" id="subscribe">
+                  <input v-model="email" placeholder="邮箱地址" />
+                  <button @click="doSubscribe">订阅</button>
+                </div>
 
-        </main>
+                <div class="quick-links" style="margin-top:18px">
+                  <h4>快速入口</h4>
+                  <div v-for="link in cfg.quickLinks" :key="link.text" style="margin-top:8px">
+                    <a :href="link.href" class="nav-link">{{ link.text }}</a>
+                  </div>
+                </div>
+              </aside>
+            </section>
 
-        <footer class="vp-footer">{{ cfg.footerText }}</footer>
+          </main>
+
+          <footer class="vp-footer">{{ cfg.footerText }}</footer>
+        </div>
       </div>
+
+      <!-- Non-home pages: render DefaultTheme's slot exactly as-is to avoid changing other pages -->
+      <template v-else>
+        <slot />
+      </template>
     </template>
   </component>
 </template>
@@ -98,13 +100,12 @@ import { ref, computed, onMounted } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import { useRoute, useData } from 'vitepress'
 
-// DefaultLayout component from the default theme - used to retain original header/nav
+// Use DefaultTheme.Layout when available
 const DefaultLayout = DefaultTheme && DefaultTheme.Layout ? DefaultTheme.Layout : DefaultTheme
 
 const route = useRoute()
 const isHome = computed(() => route.path === '/' || route.path === '/index.html')
 
-// read themeConfig from vitepress useData()
 const { site } = useData()
 const themeConfig = (site && site.value && site.value.themeConfig) ? site.value.themeConfig : {}
 
@@ -135,7 +136,6 @@ const defaults = {
 }
 
 const cfg = Object.assign({}, defaults, themeConfig || {})
-
 const posts = ref(cfg.posts && cfg.posts.length ? cfg.posts : [])
 
 onMounted(async () => {
@@ -164,7 +164,6 @@ function doSubscribe(){
 <style scoped>
 :root{ --primary:#7c3aed; --muted:#94a3b8; --accent1:#6ee7b7; --accent2:#7c3aed }
 .vp-container{max-width:1200px;margin:32px auto;padding:0 24px;color:#e6eef8;font-family:Inter,Arial,"PingFang SC",sans-serif}
-/* keep styles minimal here; main layout uses default theme's header */
 .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:32px}
 .muted{color:var(--muted)}
 .pill{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:600}
