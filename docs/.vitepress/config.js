@@ -20,7 +20,10 @@ export default {
       { text: "Recsys", link: "/recsys" },
       { text: "关于", link: "/" }
     ],
-    sidebar: []
+    sidebar: [],
+    footer:{
+      copyright:"Copyright@2017-2049 Jinbao "
+    }
   },
   markdown: {
 		config: (md) => {
