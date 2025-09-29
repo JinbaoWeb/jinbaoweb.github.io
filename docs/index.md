@@ -5,7 +5,8 @@ title: Jinbao
 titleTemplate: Learning by Doing
 
 hero:
-  text: 聚焦人工智能核心技术：机器学习、深度学习、推荐算法、大模型与智能体，掌握前沿方法与实践
+  text: --
+  tagline: 聚焦人工智能核心技术：机器学习、深度学习、推荐算法、大模型与智能体，掌握前沿方法与实践
 
 features:
   - title: 机器学习
