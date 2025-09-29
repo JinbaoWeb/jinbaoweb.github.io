@@ -14,7 +14,7 @@ export default {
     [
       "script",
       {
-        src: "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
+        src: "https://cdn.jsdelivr.net/npm/mathjax@4.0.0/sre/speech-worker.min.js",
         type: "text/javascript"
       }
     ],
