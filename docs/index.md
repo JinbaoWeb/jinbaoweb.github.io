@@ -5,8 +5,11 @@ title: Jinbao
 titleTemplate: Learning by Doing
 
 hero:
-  text: --
+  text: 智能矩阵
   tagline: 聚焦人工智能核心技术：机器学习、深度学习、推荐算法、大模型与智能体，掌握前沿方法与实践
+  image:
+    src: /ml.png
+    alt: ML
 
 features:
   - title: 机器学习
