@@ -5,20 +5,25 @@ title: Jinbao
 titleTemplate: Learning by Doing
 
 hero:
-  text: 聚焦机器学习 · 深度学习 · 推荐算法 · 大模型的前沿方向与最新进展
-  tagline: 机器学习 · 深度学习 · 推荐算法 · 大模型 · 工程实践
+  text: 聚焦人工智能核心技术：机器学习、深度学习、推荐算法、大模型与智能体，掌握前沿方法与实践
 
 features:
-  - icon: /ml.png
-    title: 机器学习
-    details: 如何刻画用户兴趣、画像与多模态行为特征。
-  - icon: /favicon.ico
-    title: 深度学习
-    details: 利用 RNN、Transformer 等建模用户的行为序列。
-  - icon: 🌐
-    title: 推荐算法
-    details: 基于图神经网络的推荐，建模复杂关系网络。
-  - icon: 🔄
-    title: 大模型
-    details: 解决数据稀疏与新用户/新物品推荐难题。
+  - title: 机器学习
+    details: 数据驱动的建模方法，涵盖监督、无监督及自监督学习，用于模式识别与预测分析。
+
+  - title: 深度学习
+    details: 基于神经网络的多层特征抽取方法，适用于图像、文本、语音等复杂任务。
+
+  - title: 推荐算法
+    details: 从召回到排序的个性化推荐技术，结合用户画像和行为数据提升推荐精准度。
+
+  - title: 大模型
+    details: 大规模预训练模型的构建与应用，支持跨任务迁移和多模态智能应用。
+
+  - title: 强化学习
+    details: 智能体自主决策与策略优化方法，适用于游戏、控制与自动化优化场景。
+
+  - title: AI Agent
+    details: 自主智能系统，实现感知、推理与决策闭环，支持复杂任务自动化与协作。
+
 ---
