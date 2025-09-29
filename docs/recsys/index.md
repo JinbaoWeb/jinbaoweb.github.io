@@ -1,41 +1,82 @@
 # 推荐算法
 
 <style>
-.blog-list {
+.blog-timeline {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 32px;
 }
-.blog-item {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+.category-section {
+  border-left: 3px solid #42b983;
+  padding-left: 16px;
+  position: relative;
 }
-.blog-item a {
+.category-section::before {
+  content: attr(data-category);
+  position: absolute;
+  left: -120px;
+  top: 0;
   font-weight: bold;
-  text-decoration: none;
   color: #42b983;
 }
-.blog-item a:hover {
+.timeline-item {
+  position: relative;
+  margin: 12px 0 12px 20px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background-color: #42b983;
+  border-radius: 50%;
+}
+.timeline-item a {
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+.timeline-item a:hover {
   text-decoration: underline;
 }
-.blog-item .meta {
+.timeline-item .date {
   font-size: 0.85em;
   color: #666;
+  margin-left: 8px;
 }
 </style>
 
-<div class="blog-list">
-  <div class="blog-item">
-    <a href="/blog/post1.html">文章标题 1</a>
-    <div class="meta">2025-09-29 | 分类: 推荐算法</div>
+<div class="blog-timeline">
+
+  <div class="category-section" data-category="推荐算法">
+    <div class="timeline-item">
+      <a href="/blog/post1.html">文章标题 A</a>
+      <span class="date">2025-09-29</span>
+    </div>
+    <div class="timeline-item">
+      <a href="/blog/post4.html">文章标题 B</a>
+      <span class="date">2025-09-25</span>
+    </div>
   </div>
-  <div class="blog-item">
-    <a href="/blog/post2.html">文章标题 2</a>
-    <div class="meta">2025-09-28 | 分类: 机器学习</div>
+
+  <div class="category-section" data-category="机器学习">
+    <div class="timeline-item">
+      <a href="/blog/post2.html">文章标题 C</a>
+      <span class="date">2025-09-28</span>
+    </div>
+    <div class="timeline-item">
+      <a href="/blog/post5.html">文章标题 D</a>
+      <span class="date">2025-09-22</span>
+    </div>
   </div>
-  <div class="blog-item">
-    <a href="/blog/post3.html">文章标题 3</a>
-    <div class="meta">2025-09-27 | 分类: 算法工程</div>
+
+  <div class="category-section" data-category="算法工程">
+    <div class="timeline-item">
+      <a href="/blog/post3.html">文章标题 E</a>
+      <span class="date">2025-09-27</span>
+    </div>
   </div>
+
 </div>
