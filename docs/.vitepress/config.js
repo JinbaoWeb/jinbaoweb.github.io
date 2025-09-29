@@ -15,6 +15,7 @@ export default {
   title: "JinbaoWeb",
   description: "Learning by Doing",
   themeConfig: {
+	logo: '/favicon.ico',
     nav: [
       { text: "首页", link: "/" },
       { text: "Recsys", link: "/recsys" },
