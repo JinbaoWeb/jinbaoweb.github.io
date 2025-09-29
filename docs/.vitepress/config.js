@@ -15,13 +15,13 @@ export default {
   title: "JinbaoWeb",
   description: "Learning by Doing",
   themeConfig: {
-	siteTitle: 'Jinbao',
+	siteTitle: '算法之巅',
 	logo: '/favicon.ico',
     nav: [
       { text: "首页", link: "/" },
       { text: "机器学习", link: "/ml" },
       { text: "深度学习", link: "/ml" },
-      { text: "Recsys", link: "/recsys" },
+      { text: "推荐算法", link: "/recsys" },
       { text: "大模型", link: "/llm" },
       { text: "关于", link: "/about" }
     ],
