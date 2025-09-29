@@ -1,4 +1,3 @@
-# 推荐算法
 
 <style>
 .blog-timeline {
@@ -50,29 +49,40 @@
 
 <div class="blog-timeline">
 
-  <div class="category-section" data-category="推荐算法">
+  <div class="category-section" data-category="召回算法">
     <div class="timeline-item">
-      <a href="/blog/post1.html">文章标题 A</a>
+      <a href="/recsys/cf">协同过滤算法</a>
       <span class="date">2025-09-29</span>
     </div>
     <div class="timeline-item">
-      <a href="/blog/post4.html">文章标题 B</a>
+      <a href="/recsys/fm">FM因子分解机</a>
+      <span class="date">2025-09-25</span>
+    </div>
+    <div class="timeline-item">
+      <a href="/recsys/mf">推荐系统的矩阵分解</a>
       <span class="date">2025-09-25</span>
     </div>
   </div>
 
-  <div class="category-section" data-category="机器学习">
+  <div class="category-section" data-category="排序算法">
     <div class="timeline-item">
-      <a href="/blog/post2.html">文章标题 C</a>
+      <a href="/recsys/deepfm">深度模型DeepFM模型</a>
       <span class="date">2025-09-28</span>
     </div>
     <div class="timeline-item">
-      <a href="/blog/post5.html">文章标题 D</a>
+      <a href="/recsys/wdl">深度模型Wide&Deep模型</a>
       <span class="date">2025-09-22</span>
     </div>
   </div>
 
-  <div class="category-section" data-category="算法工程">
+  <div class="category-section" data-category="多目标算法">
+    <div class="timeline-item">
+      <a href="/recsys/mmoe">多任务模型MMoE</a>
+      <span class="date">2025-09-22</span>
+    </div>
+  </div>
+
+  <div class="category-section" data-category="序列推荐">
     <div class="timeline-item">
       <a href="/blog/post3.html">文章标题 E</a>
       <span class="date">2025-09-27</span>
