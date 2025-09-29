@@ -1,6 +1,6 @@
 export default {
   title: "JinbaoWeb",
-  description: "基于 VitePress 构建",
+  description: "Learning by Doing",
   themeConfig: {
     nav: [
       { text: "首页", link: "/" },
