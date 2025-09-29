@@ -22,8 +22,9 @@ export default {
       { text: "关于", link: "/" }
     ],
     sidebar: [],
-    footer:{
-      copyright:"Copyright@2017-2049 Jinbao "
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2017-present Jinbao'
     }
   },
   markdown: {
