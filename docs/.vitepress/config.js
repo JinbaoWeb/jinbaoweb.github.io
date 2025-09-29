@@ -19,12 +19,13 @@ export default {
 	logo: '/favicon.ico',
     nav: [
       { text: "首页", link: "/" },
+      { text: "机器学习", link: "/ml" },
+      { text: "深度学习", link: "/ml" },
       { text: "Recsys", link: "/recsys" },
-      { text: "关于", link: "/" }
+      { text: "大模型", link: "/llm" },
+      { text: "关于", link: "/about" }
     ],
-    sidebar: [],
     footer: {
-      message: 'Released under the MIT License.',
       copyright: 'Copyright © 2017-present Jinbao'
     }
   },
