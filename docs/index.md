@@ -5,21 +5,26 @@ title: 我的博客
 titleTemplate: 用 VitePress 驱动的静态博客
 
 hero:
-  name: Jinbao
-  text: 由数据与数学驱动的工程笔记 专注机器学习、深度学习与推荐算法
-  tagline: 算法 · 推荐系统 · NLP · 工程实践
+  text: 由数据与数学驱动的工程笔记 专注于推荐算法 聚焦推荐系统的前沿方向与最新进展
+  tagline: 机器学习 · 深度学习 · 推荐算法 · 工程实践
 
 features:
-  - icon: ✍️
-    title: 机器学习
-    details: 只需 Markdown 即可轻松创作优雅的技术文章与笔记。
-  - icon: ⚡
-    title: 深度学习
-    details: 基于 Vite 的热更新与构建，让写作与预览快到飞起。
-  - icon: 🛠️
-    title: 推荐算法
-    details: 可以直接在 Markdown 中使用 Vue 组件进行交互展示。
-  - icon: 🚀
-    title: 项目实践
-    details: 输出纯静态站点，可无缝部署到 GitHub Pages、Vercel。
+  - icon: 👥
+    title: 用户建模
+    details: 如何刻画用户兴趣、画像与多模态行为特征。
+  - icon: 🕒
+    title: 序列推荐
+    details: 利用 RNN、Transformer 等建模用户的行为序列。
+  - icon: 🌐
+    title: 图推荐
+    details: 基于图神经网络的推荐，建模复杂关系网络。
+  - icon: 🔄
+    title: 跨域与冷启动
+    details: 解决数据稀疏与新用户/新物品推荐难题。
+  - icon: ⚖️
+    title: 因果推荐
+    details: 利用因果推断方法提升推荐的公平性与可解释性。
+  - icon: 🤖
+    title: 强化学习推荐
+    details: 通过交互式学习优化长期收益与用户体验。
 ---
