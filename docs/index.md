@@ -8,7 +8,7 @@ hero:
   text: 算法之巅
   tagline: 聚焦人工智能核心技术：机器学习、深度学习、推荐算法、大模型与智能体，掌握前沿方法与实践
   image:
-    src: https://cdn.jsdelivr.net/gh/JinbaoSite/note-gen-image-sync@main/f0e9e6e4-ef0a-4998-ae47-83d57bace25a.png
+    src: https://cdn.jsdelivr.net/gh/JinbaoSite/note-gen-image-sync@main/80d495c9-0ed5-4d5d-b520-4a2e228a2653.png
     alt: ML
 
 features:
