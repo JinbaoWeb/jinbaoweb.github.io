@@ -9,10 +9,10 @@ hero:
   tagline: 机器学习 · 深度学习 · 推荐算法 · 大模型 · 工程实践
 
 features:
-  - icon: 👥
+  - icon: /ml.png
     title: 机器学习
     details: 如何刻画用户兴趣、画像与多模态行为特征。
-  - icon: 🕒
+  - icon: /favicon.ico
     title: 深度学习
     details: 利用 RNN、Transformer 等建模用户的行为序列。
   - icon: 🌐
