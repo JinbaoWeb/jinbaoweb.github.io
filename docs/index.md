@@ -1,14 +1,14 @@
 ---
 layout: home
 
-title: Jinbao
+title: 算法之巅
 titleTemplate: Learning by Doing
 
 hero:
-  text: 智能矩阵
+  text: 算法之巅
   tagline: 聚焦人工智能核心技术：机器学习、深度学习、推荐算法、大模型与智能体，掌握前沿方法与实践
   image:
-    src: /ml.png
+    src: https://cdn.jsdelivr.net/gh/JinbaoSite/note-gen-image-sync@main/f0e9e6e4-ef0a-4998-ae47-83d57bace25a.png
     alt: ML
 
 features:
