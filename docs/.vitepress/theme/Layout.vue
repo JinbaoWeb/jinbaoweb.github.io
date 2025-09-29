@@ -117,7 +117,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute } from 'vitepress'   // <- 从 vitepress 导入（可在主题中使用）
 
 const route = useRoute()
 const isHome = computed(() => route.path === '/' || route.path === '/index.html')
