@@ -67,10 +67,7 @@
               <aside class="aside">
                 <h4>订阅与更新</h4>
                 <div class="muted">获取最新文章与项目更新（每月邮件汇总）。</div>
-                <div class="subscribe" id="subscribe">
-                  <input v-model="email" placeholder="邮箱地址" />
-                  <button @click="doSubscribe">订阅</button>
-                </div>
+                
 
                 <div class="quick-links" style="margin-top:18px">
                   <h4>快速入口</h4>
@@ -152,9 +149,10 @@ onMounted(async () => {
   }
 })
 
-const email = ref('')
-function doSubscribe(){
-  if(!email.value){ alert('请先填写邮箱地址'); return }
+alert('已订阅：' + email.value + "
+已加入邮件列表（模拟）")
+  email.value = ''
+}
   alert('已订阅：' + email.value + '
 已加入邮件列表（模拟）')
   email.value = ''
