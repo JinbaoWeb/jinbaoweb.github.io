@@ -79,4 +79,15 @@
     </div>
   </section>
 
+  <!-- Topic 2 -->
+  <section class="topic">
+    <div class="topic-title">Rank</div>
+    <div class="article-list">
+      <div class="article">
+        <div class="article-meta">2025-09-15</div>
+        <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
+      </div>
+    </div>
+  </section>
+
 </div>
