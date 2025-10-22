@@ -93,6 +93,10 @@
   <section class="topic">
     <div class="topic-title">精排</div>
     <div class="article-list">
+      <div class="article">
+        <div class="article-meta">2025-09-25</div>
+        <div class="article-title"><a href="/recsys/mf">推荐系统的矩阵分解</a></div>
+      </div>
     </div>
   </section>
 
