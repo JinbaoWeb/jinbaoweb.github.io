@@ -67,21 +67,7 @@
 </style>
 
 <div class="blog-timeline">
-  <!-- Topic 1 -->
-  <section class="topic">
-    <div class="topic-title">Recall</div>
-    <div class="article-list">
-      <div class="article">
-        <div class="article-meta">2025-09-29</div>
-        <div class="article-title"><a href="/recsys/cf">协同过滤算法</a></div>
-      </div>
 
-      <div class="article">
-        <div class="article-meta">2025-09-25</div>
-        <div class="article-title"><a href="/recsys/fm">FM因子分解机</a></div>
-      </div>
-    </div>
-  </section>
   <!-- Topic 2 -->
   <section class="topic">
     <div class="topic-title">精排</div>
