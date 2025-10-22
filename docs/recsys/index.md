@@ -8,7 +8,7 @@
     }
 
     .topic-title {
-      font-size: 1.6em;
+      font-size: 1.2em;
       font-weight: bold;
       color: #007bff;
       border-left: 6px solid #007bff;
@@ -36,7 +36,7 @@
     } */
 
     .article-title {
-      font-size: 1.05em;
+      font-size: 1em;
       font-weight: 600;
       color: #333;
       margin-bottom: 4px;
@@ -70,8 +70,13 @@
 
   <!-- Topic 2 -->
   <section class="topic">
-    <div class="topic-title">精排</div>
+    <div class="topic-title">Recall</div>
     <div class="article-list">
+      <div class="article">
+        <div class="article-meta">2025-09-15</div>
+        <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
+      </div>
+
       <div class="article">
         <div class="article-meta">2025-09-15</div>
         <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
