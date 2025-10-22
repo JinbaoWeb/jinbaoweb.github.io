@@ -48,66 +48,45 @@
 </style>
 
 <div class="blog-timeline">
-  <section class="topic">
-    <div class="topic-title">召回</div>
-    <div class="article-list">
-      <div class="article">
-        <div class="article-meta">2025-09-29</div>
-        <div class="article-title"><a href="/recsys/cf">协同过滤算法</a></div>
-      </div>
 
-      <div class="article">
-        <div class="article-meta">2025-09-25</div>
-        <div class="article-title"><a href="/recsys/fm">FM因子分解机</a></div>
-      </div>
+  <div class="category-section" data-category="召回算法">
+    <div class="timeline-item">
+      <a href="/recsys/cf">协同过滤算法</a>
+      <span class="date">2025-09-29</span>
     </div>
-  </section>
-
-  <!-- Topic 2 -->
-  <section class="topic">
-    <div class="topic-title">精排</div>
-    <div class="article-list">
-      <div class="article">
-        <div class="article-meta">2025-09-25</div>
-        <div class="article-title"><a href="/recsys/mf">推荐系统的矩阵分解</a></div>
-      </div>
-
-      <div class="article">
-        <div class="article-meta">2025-09-15</div>
-        <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
-      </div>
+    <div class="timeline-item">
+      <a href="/recsys/fm">FM因子分解机</a>
+      <span class="date">2025-09-25</span>
     </div>
-  </section>
-
-  <!-- Topic 3 -->
-  <section class="topic">
-    <div class="topic-title">多目标算法</div>
-    <div class="article-list">
-      <div class="article">
-        <div class="article-meta">2025-09-25</div>
-        <div class="article-title"><a href="/recsys/mmoe">多任务模型MMoE</a></div>
-      </div>
-
-      <div class="article">
-        <div class="article-meta">2025-09-15</div>
-        <div class="article-title"><a href="#">深度模型DeepFM模型</a></div>
-      </div>
+    <div class="timeline-item">
+      <a href="/recsys/mf">推荐系统的矩阵分解</a>
+      <span class="date">2025-09-25</span>
     </div>
-  </section>
+  </div>
 
-  <!-- Topic 4 -->
-  <section class="topic">
-    <div class="topic-title">序列推荐</div>
-    <div class="article-list">
-      <div class="article">
-        <div class="article-meta">2025-09-25</div>
-        <div class="article-title"><a href="#">Transformer4rec</a></div>
-      </div>
-
-      <div class="article">
-        <div class="article-meta">2025-09-15</div>
-        <div class="article-title"><a href="#">深度模型DeepFM模型</a></div>
-      </div>
+  <div class="category-section" data-category="排序算法">
+    <div class="timeline-item">
+      <a href="/recsys/deepfm">深度模型DeepFM模型</a>
+      <span class="date">2025-09-28</span>
     </div>
-  </section>
+    <div class="timeline-item">
+      <a href="/recsys/wdl">深度模型Wide&Deep模型</a>
+      <span class="date">2025-09-22</span>
+    </div>
+  </div>
+
+  <div class="category-section" data-category="多目标算法">
+    <div class="timeline-item">
+      <a href="/recsys/mmoe">多任务模型MMoE</a>
+      <span class="date">2025-09-22</span>
+    </div>
+  </div>
+
+  <div class="category-section" data-category="序列推荐">
+    <div class="timeline-item">
+      <a href="/blog/post3.html">文章标题 E</a>
+      <span class="date">2025-09-27</span>
+    </div>
+  </div>
+
 </div>
