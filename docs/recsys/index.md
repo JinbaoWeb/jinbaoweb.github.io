@@ -1,13 +1,5 @@
 
   <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #f9fafc;
-      color: #333;
-      margin: 0;
-      padding: 40px 20px;
-      line-height: 1.6;
-    }
 
     h1 {
       text-align: center;
@@ -80,7 +72,7 @@
       }
     }
   </style>
-
+<div class="category-container">
   <section class="topic">
     <div class="topic-title">召回</div>
     <div class="article-list">
@@ -143,3 +135,4 @@
       </div>
     </div>
   </section>
+</div>
