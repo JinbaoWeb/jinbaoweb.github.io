@@ -363,11 +363,9 @@ ReAct让语言模型从“语言大师”变成了“智能行动者”。
 
 ---
 
-### 📘 延伸阅读
+### 📘 参考文献
 
 * Yao et al., *ReAct: Synergizing Reasoning and Acting in Language Models*, Stanford, 2022.
 * LangChain 官方文档：ReAct Agent 模式。
 * HuggingFace Blog: *Building reasoning agents with open-source LLMs.*
-
-```
 
