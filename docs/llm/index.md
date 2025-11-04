@@ -80,7 +80,4 @@
     </div>
   </section>
 
-
-  </section>
-
 </div>
