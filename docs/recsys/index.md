@@ -73,8 +73,8 @@
     <div class="topic-title">Recall</div>
     <div class="article-list">
       <div class="article">
-        <div class="article-meta">2025-09-15</div>
-        <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
+        <div class="article-meta">2025-11-10</div>
+        <div class="article-title"><a href="/recsys/deepfm">Wide & Deep 推荐模型</a></div>
       </div>
     </div>
   </section>
@@ -83,6 +83,10 @@
   <section class="topic">
     <div class="topic-title">Rank</div>
     <div class="article-list">
+      <div class="article">
+        <div class="article-meta">2025-11-10</div>
+        <div class="article-title"><a href="/recsys/deepfm">Wide & Deep 推荐模型</a></div>
+      </div>
       <div class="article">
         <div class="article-meta">2025-09-15</div>
         <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
