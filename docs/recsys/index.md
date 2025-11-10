@@ -74,7 +74,7 @@
     <div class="article-list">
       <div class="article">
         <div class="article-meta">2025-11-10</div>
-        <div class="article-title"><a href="/recsys/deepfm">Wide & Deep 推荐模型</a></div>
+        <div class="article-title"><a href="/recsys/wdl">Wide & Deep 推荐模型</a></div>
       </div>
     </div>
   </section>
@@ -85,7 +85,7 @@
     <div class="article-list">
       <div class="article">
         <div class="article-meta">2025-11-10</div>
-        <div class="article-title"><a href="/recsys/deepfm">Wide & Deep 推荐模型</a></div>
+        <div class="article-title"><a href="/recsys/wdl">Wide & Deep 推荐模型</a></div>
       </div>
       <div class="article">
         <div class="article-meta">2025-09-15</div>
