@@ -1,6 +1,6 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import { data as posts } from './posts.data.mjs'
+import { data as posts } from '../../data/posts.data.js'
 </script>
 
 <template>
@@ -54,4 +54,5 @@ import { data as posts } from './posts.data.mjs'
   color: var(--vp-c-text-soft);
 }
 </style>
+
 
