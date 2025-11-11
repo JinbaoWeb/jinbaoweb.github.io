@@ -16,6 +16,7 @@ export default {
 
   enhanceApp({ app }) {
     // 这里也可以注册全局组件
-    // app.component('ListLayout', ListLayout)
+    app.component('ListLayout', ListLayout)
   }
 }
+
