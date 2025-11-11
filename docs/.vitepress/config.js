@@ -30,8 +30,11 @@ export default {
     }
   },
   markdown: {
-		config: (md) => {
-			md.use(mathjax3);
-		}
-	}
+    config: (md) => {
+	  md.use(mathjax3);
+	},
+	image: {
+      lazyLoading: true
+    }
+  }
 }
