@@ -84,6 +84,10 @@
     <div class="topic-title">Rank</div>
     <div class="article-list">
       <div class="article">
+        <div class="article-meta">2025-09-15</div>
+        <div class="article-title"><a href="/recsys/gdbt_lr">Facebook 广告点击率预测系统(GDBT+LR)</a></div>
+      </div>
+      <div class="article">
         <div class="article-meta">2025-11-10</div>
         <div class="article-title"><a href="/recsys/wdl">Wide & Deep 推荐模型</a></div>
       </div>
