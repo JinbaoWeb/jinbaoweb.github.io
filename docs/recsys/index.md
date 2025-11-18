@@ -74,7 +74,7 @@
     <div class="article-list">
       <div class="article">
         <div class="article-meta">2025-11-10</div>
-        <div class="article-title"><a href="/recsys/wdl">Wide & Deep 推荐模型</a></div>
+        <div class="article-title"><a href="/recsys/mf">MF</a></div>
       </div>
     </div>
   </section>
@@ -89,10 +89,10 @@
       </div>
       <div class="article">
         <div class="article-meta">2025-11-10</div>
-        <div class="article-title"><a href="/recsys/wdl">Wide & Deep 推荐模型</a></div>
+        <div class="article-title"><a href="/recsys/wdl">Wide & Deep：同时拥有“记忆”与“泛化”的推荐系统架构</a></div>
       </div>
       <div class="article">
-        <div class="article-meta">2025-09-15</div>
+        <div class="article-meta">2025-11-18</div>
         <div class="article-title"><a href="/recsys/deepfm">深度模型DeepFM模型</a></div>
       </div>
     </div>
