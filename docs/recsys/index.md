@@ -73,8 +73,8 @@
     <div class="topic-title">Recall</div>
     <div class="article-list">
       <div class="article">
-        <div class="article-meta">2025-11-10</div>
-        <div class="article-title"><a href="/recsys/mf">MF</a></div>
+        <div class="article-meta">2023-01-10</div>
+        <div class="article-title"><a href="/recsys/cf">协同过滤算法详解：UserCF 与 ItemCF 的原理、公式与工程实践</a></div>
       </div>
     </div>
   </section>
