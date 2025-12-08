@@ -1,5 +1,4 @@
 
-
 <style>
     .topic {
       margin-bottom: 50px;
@@ -71,7 +70,7 @@
 
   <!-- Topic 2 -->
   <section class="topic">
-    <div class="topic-title">机器学习</div>
+    <div class="topic-title">Recall</div>
     <div class="article-list">
       <div class="article">
         <div class="article-meta">2025-11-10</div>
@@ -82,13 +81,12 @@
 
   <!-- Topic 2 -->
   <section class="topic">
-    <div class="topic-title">深度许学习</div>
+    <div class="topic-title">深度学习</div>
     <div class="article-list">
       <div class="article">
         <div class="article-meta">2025-09-15</div>
         <div class="article-title"><a href="/ml/optimizer">深度学习优化器Optimizer综述：从 SGD 到 AdamW</a></div>
       </div>
-      
     </div>
   </section>
 
