@@ -1,138 +1,231 @@
-# 协同过滤算法
+# 协同过滤算法详解：UserCF 与 ItemCF 的原理、公式与工程实践
 
-## 1. 协同过滤算法基本原理
+协同过滤（Collaborative Filtering, CF）是推荐系统中最经典、最通用的一类算法。其核心思想是通过“用户行为”来挖掘相似性，以此生成个性化推荐结果。CF 不依赖显式特征工程，对稀疏、冷启动敏感，但在电商、内容推荐、社区行为预测等领域依然具有极高的工程价值。
 
-**协同过滤：通过群体的行为来找到某种相似性（用户之间的相似性或者物品之间的相似性），通过相似性来为用户做决策和推荐**。
+# 1 引言
 
-基于用户的协同过滤算法（UserCF）的基本原理：给用户推荐和他兴趣相似的其他用户喜欢的物品。
+协同过滤的基本假设为：
 
-基于物品的协同过滤算法（ItemCF）的基本原理：给用户推荐和他之前喜欢的物品相似的物品。
+> **喜欢相似物品的用户往往兴趣相似；被相似用户喜欢的物品往往也相关。**
 
-## 2. 基于用户的协同过滤算法
+换言之，无论从用户角度还是物品角度做相似性建模，最终都可以得到用户潜在兴趣的合理估计。
 
-### 2.1 UserCF的算法流程
+CF 方法通常基于以下数据来源：
 
-1. 根据用户的历史行为，获取用户之间的共现矩阵$C[u][v]= \vert N(u) \bigcap N(v) \vert$
-2. 根据共现矩阵得到用户与用户之间的相似矩阵$W[u][v]= \frac{C[u][v]}{\vert N(u) \vert * \vert N(v) \vert}$
-3. 根据用户之间的相似矩阵找到topK个相似的用户作为和目标用户兴趣相似的用户集合，并找到这个集合中属于这个集合中用户喜欢但目标用户没有出现的物品列表，对物品列表中的物品计算兴趣程度$p(u, i) = \sum {W[u][v]}$，按照兴趣程度排序推荐给目标用户
+* 用户对物品的显式评分（如星级、点赞）
+* 用户对物品的隐式反馈（如点击、浏览、停留时间、收藏、加购等）
+* 用户-物品交互矩阵较为稀疏
 
-首先建立与物品发生行为的用户列表，令$C[u][v]$表示用户u和用户v相同物品的个数，$N[u]$表示用户u的物品数，遍历每个物品的用户列表，将用户列表中的两两用户对应的$C[u][v]$加1，同时计算$N[u]$，最后计算用户之间的相似矩阵$W[u][v]$；推荐物品时，先从相似矩阵中得到目标用户topK个相似用户，然后计算属于这topK个用户但不属于目标用户的所有物品的兴趣程度值即可。
+相比深度模型，CF 的实现简单、可解释性强，但计算复杂度可能在大规模应用下成为瓶颈。
 
-### 2.2 UserCF的代码实现
+# 2 UserCF：基于用户的协同过滤
 
-```python
-import math
-def UserSimilarity(train):
-    item_users = dict()
-    for user, items in train.items():
-        for item in items.keys():
-            if item not in item_users:
-                item_users[item] = set()
-            item_users[item].add(user)
-    C = dict()
-    N = dict()
-    for item, users in item_users.items():
-        for u in users:
-            N[user] += 1
-            for v in users:
-                if u == v:
-                    continue
-                C[u][v] += 1
-    W = dict()
-    for u, related_users in C.items():
-        for v, cuv in related_users.items():
-            W[u][v] = cuv / math.sqrt(N[u] * N[v])
-    return W
-def Recommand(user, train, W, K):
-    rank = dict()
-    interacted_items = train[user]
-    for v, wuv in sorted(W[user].items, 
-                         key=lambda x: x[1], reverse=True)[:K]:
-        for i, rvi in train[v].items:
-            if i in interacted_items:
-                continue
-            rank[i] += wuv
-    return rank
-```
+UserCF 的思想是：
 
----
+> 找到与目标用户兴趣相似的用户，然后推荐这些相似用户喜欢的物品。
 
-## 3. 基于物品的协同过滤算法（ItemCF）
+流程分为三步：
 
-### 3.1 ItemCF的算法流程
+1. 构建用户-物品行为矩阵
+2. 计算用户间相似度
+3. 基于相似用户进行兴趣预测与推荐
 
-1. 根据用户的历史行为，获取物品之间的共现矩阵$C[i][j]= \vert N(i) \bigcap N(j) \vert$
-2. 根据共现矩阵得到物品之间的相似矩阵$W[i][j]= \frac{C[i][j]}{\vert N(i) \vert * \vert N(j) \vert}$
-3. 根据相似矩阵找到目标用户发生行为的物品列表中每个物品对应的topK个物品，并计算目标用户对每个物品对应的topK个物品的兴趣程度$p(u, i)= \sum W[i][j]$，按照兴趣程度排序推荐给目标用户
+## 2.1 用户相似度计算
 
-### 3.2 ItemCF的代码实现
+### 余弦相似度（最常用）
 
-```python
-import math
-def ItemSimilarity(train):
-    C = dict()
-    N = dict()
-    for u, items in train.items():
-        for i in items:
-            N[i] += 1
-            for j in items:
-                if i == j:
-                    continue
-                C[i][j] += 1
-    W = dict()
-    for i, related_items in C.items():
-        for j, cij in related_items.items():
-            W[i][j] = cij / math.sqrt(N[i] * N[j])
-    return W
+设用户 ( $u$ ) 和用户 ( $v$ ) 对物品集合的行为向量为：
 
-def Recommendation(train, user_id, W, K):
-    rank = dict()
-    ru = train[user_id]
-    for i, pi in ru.items():
-        for j, wij in sorted(W[i].items(), 
-                             key=lambda x: x[1], reverse=True)[:K]:
-            if j in ru:
-                continue
-            rank[j] += wij
-    return rank
-```
-
----
-
-## 4. 协同过滤算法的改进
-
-### 4.1 相似度的改进IUF
-
-用户（物品）相似度的计算公式为
 $$
-w_{uv} = \frac{\vert N(u) \bigcap N(v) \vert}{\sqrt{\vert N(u) \vert \vert N(v) \vert}}
-$$
-相似度的计算实际上更大程度会受活跃用户（物品）的影响比较大，所以计算相似度应该活跃用户（物品）对物品的相似度的贡献应该小于不活跃的用户（物品），现引入IUF(Inverse User Frequence)，即用户（物品）活跃度对数的倒数的参数，来修正相似度，公式如下：
-$$
-w_{uv} = \frac{\sum_{i \in N(u) \bigcap N(v)} \frac{1}{log(1+ \vert N(i) \vert)}}{\sqrt{ \vert N(u) \vert \vert N(v) \vert}}
+\vec{r_u} = (r_{u1}, r_{u2}, \dots, r_{un})
 $$
 
-### 4.2 相似度的归一化Norm
-
-一般来说，热门物品相似度比较大，所以推荐的物品大多数是推荐比较热门里的物品，因此，推荐的覆盖率就比较低，如果进行相似度的归一化，就可以提供推荐的覆盖率
-
-相似度归一化公式为
 $$
-w_{ij} = \frac{w_{ij}}{max_{j} w_{ij}}
+\vec{r_v} = (r_{v1}, r_{v2}, \dots, r_{vn})
 $$
 
-## 5. ItemCF和UserCF的对比
+余弦相似度定义为：
 
-| 指标 | UserCF | ItemCF |
-| :-- | :-- | :-- |
-| 性能 | 适用于用户较少的场合，如果用户很多，计算用户相似度矩阵代价很大 | 适用于物品数明显小于用户数的场合，如果物品很多，计算物品相似度矩阵代价很大 |
-| 领域 | 时效性较强，用户个性化兴趣不太明显的领域 | 长尾物品丰富，用户个性化需求强烈的领域 |
-| 实时性 | 用户有新行为，不一定造成推荐结果的立即变化 | 用户有新行为，一定会造成推荐结果的实时变化 |
-| 冷启动 | 在新用户对很少的物品产生行为后，不能立即对他进行个性化推荐，因为用户相似度矩阵是每隔一段时间离线计算的 | 新用户只要对一个物品产生行为，就可以给他推荐和该物品相关的其他物品 |
+$$
+\text{sim}(u, v) = \frac{\vec{r_u} \cdot \vec{r_v}}{|\vec{r_u}| |\vec{r_v}|}
+$$
 
-## 6. 参考资料
+适用于评分体系一致的场景。
 
-[1] [协同过滤推荐算法总结](https://zhuanlan.zhihu.com/p/25069367)
-[2] [最小推荐系统：协同过滤（Collaborative Filtering)](https://zhuanlan.zhihu.com/p/149152447)
+### Jaccard 相似度（适合隐式反馈）
 
- 
+$$
+\text{sim}(u, v) = \frac{|I(u) \cap I(v)|}{|I(u) \cup I(v)|}
+
+$$
+
+其中 ( $I(u)$ ) 表示用户 ( $u$ ) 已交互过的物品集合。
+
+### Pearson 相关系数（去均值）
+
+$$
+\text{sim}(u, v)=
+\frac{
+\sum_{i \in I(u) \cap I(v)} (r_{ui}-\bar r_u)(r_{vi}-\bar r_v)
+}{
+\sqrt{\sum_{i \in I(u)}(r_{ui}-\bar r_u)^2}
+\sqrt{\sum_{i \in I(v)}(r_{vi}-\bar r_v)^2}
+}
+
+$$
+更适用于评分具有偏置的场景。
+
+
+## 2.2 用户对物品的偏好预测
+
+对于用户 ( $u$ ) 未评分的物品 ( $i$ )，预测评分计算如下：
+$$
+
+\hat{r}*{ui} = \frac{
+\sum*{v \in N_k(u)} \text{sim}(u, v) \cdot r_{vi}
+}{
+\sum_{v \in N_k(u)} |\text{sim}(u, v)|
+}
+
+$$
+其中：
+
+* ( $N_k(u)$ ) 是与用户 ( $u$ ) 最相似的前 ( $k$ ) 个用户
+* ( $r_{vi}$ ) 是用户 ( $v$ ) 对物品 ( $i$ ) 的评分或行为值
+
+# 3 ItemCF：基于物品的协同过滤
+
+ItemCF 的思想是：
+
+> 找到与目标物品相似的物品，然后根据用户历史行为推荐其可能感兴趣的物品。
+
+与 UserCF 关注“相似用户”不同，ItemCF 关注“相似物品”。
+
+ItemCF 是工业界更常用的 CF 方法，因为其稳定性更好、可在线增量更新。
+
+
+## 3.1 物品相似度计算
+
+构建物品之间的共现关系：
+
+定义：
+
+* 用户集合为 ( $U$ )
+* 某用户 ( $u$ ) 交互过的物品集合为 ( $I(u)$ )
+
+两个物品的共同用户数为：
+
+$$
+
+C(i, j) = |U(i) \cap U(j)|
+
+$$
+
+
+
+其中 ( $U(i)$ ) 表示历史上与物品 ( $i$ ) 交互的用户集合。
+
+### 余弦相似度（经典 ItemCF）
+
+$$
+\text{sim}(i, j) =
+\frac{C(i, j)}{\sqrt{|U(i)| \cdot |U(j)|}}
+$$
+
+对热门物品的共同用户数进行惩罚，使得物品相似性更加均衡。
+
+### 加权 ItemCF
+
+当用户行为序列影响物品共现权重时，可引入行为强度衰减、时间衰减等：
+
+$$
+C(i, j) = \sum_{u \in U(i) \cap U(j)}
+\frac{1}{\log(1 + |I(u)|)}
+$$
+
+## 3.2 用户对物品的偏好预测
+
+用户 ( $u$ ) 对物品 ( $i$ ) 的兴趣预测公式：
+
+$$
+\hat{r}*{ui} =
+\sum*{j \in I(u)} \text{sim}(i, j) \cdot r_{uj}
+$$
+
+如果使用 top-K 相似物品：
+
+$$
+\hat{r}*{ui} =
+\sum*{j \in N_k(i; I(u))}
+\text{sim}(i, j) \cdot r_{uj}
+$$
+
+其中：
+
+* ( I(u) ) 是用户历史交互物品集合
+* ( N_k(i; I(u)) ) 表示与物品 ( i ) 最相似的前 ( k ) 个物品
+
+# 4 UserCF 与 ItemCF 的对比
+
+| 维度      | UserCF        | ItemCF     |
+| ------- | ------------- | ---------- |
+| 相似度建模对象 | 用户            | 物品         |
+| 稳定性     | 低（用户兴趣波动）     | 高（物品属性更稳定） |
+| 离线计算复杂度 | 用户规模平方级别      | 物品规模平方级别   |
+| 工业界使用情况 | 较少（大规模难）      | 最常用 CF 方法  |
+| 更新方式    | 用户更新需重算一部分相似度 | 新物品加入成本低   |
+
+结论：
+
+> 在真实业务中，**ItemCF 是更主流的协同过滤方法**，特别是在内容或商品矩阵庞大、用户行为稀疏的背景下。
+
+# 5 工程实践与优化策略
+
+## 5.1 数据处理
+
+适用于隐式反馈（如点击）时常使用：
+
+$$
+r_{ui} =
+\begin{cases}
+1, & \text{用户有行为} \
+0, & \text{无行为}
+\end{cases}
+$$
+
+也可根据行为权重设计不同 score（点击 < 收藏 < 加购 < 购买）。
+
+## 5.2 相似度矩阵压缩
+
+物品量往往百万级，需进行：
+
+* Top-K 相似物品截断
+* 基于倒排的稀疏化存储
+* 离线 + 增量构建方案
+
+## 5.3 冷启动问题
+
+用户冷启动：
+
+* 可结合人口属性、上下文特征
+* 可接入热门推荐
+
+物品冷启动：
+
+* 可结合内容特征（如文本、图像）
+* 可使用混合模型（CF + 特征模型）
+
+## 5.4 在线推荐策略
+
+典型工程 pipeline：
+
+1. 基于 ItemCF 获取候选集
+2. 召回 Top-N 物品
+3. 将召回物品送入排序模型（如 Wide&Deep、FM、DIN 等）
+4. 结合业务规则（去重、过滤、曝光控制）
+
+# 6 总结
+
+协同过滤作为推荐系统的基石，即使在深度学习时代仍具有不可替代的价值。在需求快速验证、数据稀疏或特征不足的场景中，它依然是首选的推荐算法。
+
+
