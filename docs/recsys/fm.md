@@ -1,65 +1,136 @@
-# FM因子分解机
+# 因子分解机 (FM)：推荐系统中的“稀疏数据之王”
 
-## 1. 序言
+## 1. 引言
 
-传统的LR模型存在仅仅只能使用单一特征进行模型预估，不具备进行特征交叉生成高纬度组合特征的能力，忽略了特征与特征之间的关联信息，导致表达能力不强的缺点。
+在推荐系统、广告点击率预估（CTR）、排序模型等应用场景中，通常面对一种典型的数据形态：特征维度极高、极其稀疏、存在大量未观测的特征组合。例如，在用户与商品的交互数据中，如果采用 one-hot 编码，那么每次输入中往往仅有少数维度为非零值，其余维度均为零。在这种条件下，高维稀疏特征之间蕴藏着丰富的语义关系，如“用户–商品”、“商品–类目”、“用户–上下文”等二阶交互，如果不能有效捕获，将导致模型表现受限
 
-以往的方式是需要根据丰富的业务经验手动组合一些特征，然后再通过各种分析手段筛选组合特征，最后将有效的组合特征加入到LR模型中，整个过程异常复杂而且耗费人力巨大；再或者是通过暴力组合特征，即对任意两个特征进行两两特征组合，用数学公式来表达就是
+
+### 线性模型 (LR) 的局限
+
+传统的逻辑回归 (Logistic Regression) 模型公式如下：
+
 $$
-y = w_0 + \sum_{i=1}^n w_i x_i + \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} w_{ij}x_i x_j
-$$
-这种方式虽然在一定程度上解决了特征组合的问题，但存在两个问题：
-
- 1.  LR模型通常采用one-hot处理的类别型特征会使得特征向量极度稀疏，当进行两两特征交叉时，会使得类别型特征更加稀疏，而且导致大部分交叉特征的权重因为有效训练数据的不足，无法完全收敛
- 2. LR模型需要学习的参数由$n$上升到$n^2$，极大增加了训练复杂难度。
-
-
-## 2. FM算法原理
-
-因子分解机FM算法的基本原理是**权重系数$w_{ij}$可以分解成一个$k \times 1$向量的转置乘另一个$k \times 1$向量，或者两个$k \times 1$向量的内积**，即$w_{ij}=V_i^T V_j=<v_i , v_j>=\sum_{t=1}^k v_{it} v_{jt}$，分解出来的$k \times 1$向量$v_i$称之为特征$x_i$的**隐向量**，那么
-$$
-\begin{aligned}
-\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} w_{ij}x_i x_j &=  \frac{1}{2} (\sum_{i=1}^n \sum_{j=1}^n w_{ij} x_i x_j - \sum_{i=1}^n w_{ii} x_i x_i)  \newline
-&= \frac{1}{2} (\sum_{i=1}^n \sum_{j=1}^n (V_i^T V_j) x_i x_j - \sum_{i=1}^n (V_i^T V_i) x_i x_i) \newline
-&= \frac{1}{2} (\sum_{i=1}^n \sum_{j=1}^n (\sum_{t=1}^k v_{it} v_{jt}) x_i x_j - \sum_{i=1}^n (\sum_{t=1}^k v_{it} v_{it}) x_i x_i) \newline
-&= \frac{1}{2} (\sum_{i=1}^n \sum_{j=1}^n \sum_{t=1}^k v_{it} v_{jt} x_i x_j - \sum_{i=1}^n \sum_{t=1}^k v_{it} v_{it} x_i x_i) \newline
-&= \frac{1}{2} \sum_{t=1}^k(\sum_{i=1}^n \sum_{j=1}^n v_{it} v_{jt} x_i x_j - \sum_{i=1}^n v_{it} v_{it} x_i x_i) \newline
-&= \frac{1}{2} \sum_{t=1}^k(\sum_{i=1}^n v_{it} x_i \sum_{j=1}^n v_{jt} x_j - \sum_{i=1}^n v_{it} v_{it} x_i x_i) \newline
-&= \frac{1}{2} \sum_{t=1}^k((\sum_{i=1}^n v_{it} x_i)^2 - \sum_{i=1}^n v_{it}^2 x_i^2)
-\end{aligned}
+y = w_0 + \sum_{i=1}^n w_i x_i
 $$
 
-FM算法为每个特征$x_i$学习了一个$k \times 1$的的隐向量，把原本要学习的参数$n^2$减少到了$nk$，极大的降低了训练开销；
+LR 只能学习特征的独立权重，**无法捕获特征之间的组合关系**。
 
-同时FM能更好地解决数据稀疏性的问题，假定样本中有两个特征$(X,Y)$，对于训练样本$(x_1, y_1)$，FM算法可以学习到$x_1$的隐向量和$y_1$的隐向量，计算得到权重系数$w_{11}$，对于训练样本$(x_2, y_2)$，FM算法可以学习到$x_2$的隐向量和$y_2$的隐向量，计算得到权重系数$w_{22}$，那么对于没有出现的训练样本$(x_1, y_2), (x_2, y_1)$，可以通过对$x_1$的隐向量和$y_2$的隐向量的内积得到样本$(x_1, y_2)$的权重系数$w_{12}$，以及对$x_2$的隐向量和$y_1$的隐向量的内积得到样本$(x_2, y_1)$的权重系数$w_{21}$，所以FM算法可以学习到训练样本中没有出现组合特征的权重系数，更好地解决了数据稀疏性问题。
+> **例子：** “女性”用户可能更喜欢“化妆品”。但在 LR 中，“女性”的权重和“化妆品”的权重是独立的，模型不知道这两个特征同时也出现时会产生“化学反应”。
 
-FM算法的缺点也非常明显，只扩展了二阶特征交叉，没办法进行更高阶的特征交叉。
+### 二阶多项式模型 (Poly2) 的困境
 
-## 3. FM实现
+为了引入特征组合，最直观的方法是给任意两个特征都加一个权重，这就是 Poly2 模型：
 
-基于tensorflow/keras的实现
-::: details 点我查看代码
-```python
-class FM_Layer(Layer):
-    def __init__(self, layer_name="fm"):
-        self.layer_name = layer_name
-        super(FM_Layer, self).__init__()
+$$
+y = w_0 + \sum_{i=1}^n w_i x_i + \sum_{i=1}^n \sum_{j=i+1}^n w_{ij} x_i x_j
+$$
 
-    def call(self, inputs, training=None, mask=None):
-        summed_features_emb = tf.reduce_sum(inputs, 1)
-        summed_features_emb_square = tf.square(summed_features_emb)
-        squared_features_emb = tf.square(inputs)
-        squared_sum_features_emb = tf.reduce_sum(squared_features_emb, 1)
-        fm_output = 0.5 * (tf.subtract(summed_features_emb_square,
-                                       squared_sum_features_emb))
-        y_fm = tf.reduce_sum(fm_output, axis=-1, keepdims=True)
-        return y_fm
-```
-:::
+虽然 $w_{ij}$ 捕捉了特征 $x_i$ 和 $x_j$ 的组合效应，但在稀疏数据下，它有两个致命缺陷：
 
-## 4. 参考资料
+1. **参数爆炸：** 权重数量从 $n$ 增加到了 $n^2$。
+2. **无法训练：** 只有当 $x_i$ 和 $x_j$ **同时不为0** 时，$w_{ij}$ 才能得到更新。在稀疏数据中，两个特定特征同时出现的概率极低，导致大部分 $w_{ij}$ 根本训练不出来。
 
-- [1] 《深度学习推荐系统》
-- [2] [FM因子分解机的原理、公式推导、Python实现和应用](https://zhuanlan.zhihu.com/p/145436595)
-- [3] [因子分解机（Factorization Machine）详解（一）](https://blog.csdn.net/lijingru1/article/details/88623136)
-- [4] [【推荐系统】Factorization Machine](https://zhuanlan.zhihu.com/p/80726100)
+## 2. FM 的核心思想：隐向量 (Latent Vectors)
+
+FM 的天才之处在于借鉴了 **矩阵分解 (Matrix Factorization)** 的思想。
+
+FM 不再直接为每对特征组合 $(x_i, x_j)$ 学习一个权重 $w_{ij}$，而是为**每一个特征 $i$ 学习一个 $k$ 维的隐向量 $\mathbf{v}_i$**。
+
+当我们需要计算特征 $i$ 和特征 $j$ 的组合权重时，只需要计算这两个向量的**内积**：
+
+$$
+w_{ij} = \langle \mathbf{v}_i, \mathbf{v}_j \rangle = \sum_{f=1}^k v_{i,f} \cdot v_{j,f}
+$$
+
+这解决了稀疏数据训练难的问题。
+
+* 即使特征 $i$ 和特征 $j$ 从未在训练集中同时出现过，只要特征 $i$ 和特征 $p$ 一起出现过（更新了 $\mathbf{v}_i$），特征 $j$ 也和特征 $p$ 一起出现过（更新了 $\mathbf{v}_j$），那么 $\mathbf{v}_i$ 和 $\mathbf{v}_j$ 就都有了值，我们就能预测 $i$ 和 $j$ 的组合效应。
+* 这是一种**泛化能力**，将参数量从 $n^2$ 降低到了 $nk$。
+
+## 3. FM 的数学公式
+
+FM 模型的标准方程如下：
+
+$$
+\hat{y}(x) = w_0 + \underbrace{\sum_{i=1}^n w_i x_i}_{\text{线性项}} + \underbrace{\sum_{i=1}^n \sum_{j=i+1}^n \langle \mathbf{v}_i, \mathbf{v}_j \rangle x_i x_j}_{\text{二阶交叉项}}
+$$
+
+其中：
+
+* $w_0$：全局偏置。
+* $w_i$：第 $i$ 个特征的线性权重。
+* $\mathbf{v}_i$：第 $i$ 个特征的隐向量，维度为 $k$，用于表示特征的潜在语义。
+* $\langle \mathbf{v}_i, \mathbf{v}_j \rangle$：向量点积，代替了 Poly2 中的 $w_{ij}$。
+  如果直接按照上面的公式计算二阶交叉项，我们需要两层循环，时间复杂度：$O(k n^2)$。
+
+
+这在大规模预测中是不可接受的。然而，FM 拥有一个非常漂亮的数学推导，可以将复杂度降低到 **线性时间 $O(kn)$**。
+
+### 3.1 推导过程
+
+聚焦于二阶项的化简：
+
+$$
+\sum_{i=1}^n \sum_{j=i+1}^n \langle \mathbf{v}_i, \mathbf{v}_j \rangle x_i x_j
+$$
+
+利用代数公式 $(a+b+c)^2 - (a^2+b^2+c^2) = 2(ab+bc+ca)$ 的推广思路，我们可以将求和重写。
+
+1. **展开点积：**
+   
+   $$
+   \sum_{i=1}^n \sum_{j=i+1}^n \sum_{f=1}^k v_{i,f} v_{j,f} x_i x_j
+   $$
+2. **交换求和顺序（提到外面）：**
+   
+   $$
+   \sum_{f=1}^k \left( \sum_{i=1}^n \sum_{j=i+1}^n v_{i,f} x_i v_{j,f} x_j \right)
+   $$
+3. **利用完全平方公式进行变换：**
+   要计算的是矩阵的上三角部分（不含对角线）。这就等于 **(整个矩阵的所有元素和 - 对角线元素和) / 2**。
+   
+   $$
+   \sum_{i=1}^n \sum_{j=i+1}^n q_{i} q_{j} = \frac{1}{2} \left( \left(\sum_{i=1}^n q_i\right)^2 - \sum_{i=1}^n q_i^2 \right)
+   $$
+4. **代入 FM 公式：**
+   最终，二阶项可以化简为：
+   
+   $$
+   \frac{1}{2} \sum_{f=1}^k \left( \left( \sum_{i=1}^n v_{i,f} x_i \right)^2 - \sum_{i=1}^n v_{i,f}^2 x_i^2 \right)
+   $$
+
+为什么这个公式快？
+
+* $\sum_{i=1}^n v_{i,f} x_i$ 只需要遍历一次特征。
+* 对于 $k$ 个维度，总复杂度变成了 $O(kn)$。
+* 在稀疏向量中，$n$ 仅指代非零元素的个数，速度极快！
+
+## 5. 梯度下降与训练
+
+由于 FM 的公式对于所有参数 ($w_0, w_i, v_{i,f}$) 都是可导的，因此可以很容易地使用随机梯度下降 (SGD) 或 Adam 进行训练。
+
+对于交叉项中的参数 $v_{i,f}$，其梯度如下（利用了上面化简后的公式）：
+
+$$
+\frac{\partial \hat{y}}{\partial v_{i,f}} = x_i \sum_{j=1}^n v_{j,f} x_j - v_{i,f} x_i^2
+$$
+
+*(注：这里 summation 包含了 $j=i$ 的情况，但在求导减法中被处理了，具体实现通常基于化简后的前向传播结果)*
+
+这意味着在做前向传播时，保存一下中间结果 $\sum v_{j,f} x_j$，反向传播时就可以直接用了。
+
+## 6. FM 与其他模型的对比
+
+| 模型 | 特征组合 | 参数量 | 稀疏性处理 | 复杂度 |
+| :--- | :--- | :--- | :--- | :--- |
+| **LR** | 无 | $n$ | 好 | $O(n)$ |
+| **Poly2** | 有 (独立权重) | $n^2$ | 差 (无法训练) | $O(n^2)$ |
+| **FM** | 有 (向量内积) | $nk$ | 好 (泛化能力强) | $O(kn)$ |
+
+## 7. 总结
+
+因子分解机 FM 是推荐系统从“人工特征工程”走向“自动特征组合”的重要一步。
+
+1. **核心优势：** 能够在数据极度稀疏的情况下，有效地学习出二阶特征组合。
+2. **效率极高：** 通过数学推导将计算复杂度降至线性，能够实时处理海量数据。
+3. **承前启后：** 它是 Wide&Deep, DeepFM, NFM 等深度学习 CTR 模型的逻辑基础（这些模型通常用 FM 替换 Wide 部分或作为 Embedding 层后的交互层）。
