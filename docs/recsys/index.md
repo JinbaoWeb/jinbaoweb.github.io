@@ -84,6 +84,10 @@
     <div class="topic-title">Rank</div>
     <div class="article-list">
       <div class="article">
+        <div class="article-meta">2023-01-01</div>
+        <div class="article-title"><a href="/recsys/fm">因子分解机 (FM)：推荐系统中的“稀疏数据之王”</a></div>
+      </div>
+      <div class="article">
         <div class="article-meta">2025-09-15</div>
         <div class="article-title"><a href="/recsys/gdbt_lr">Facebook 广告点击率预测系统(GDBT+LR)</a></div>
       </div>
