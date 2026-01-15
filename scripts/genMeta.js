@@ -4,7 +4,7 @@ import path from "node:path";
 
 const DOCS_DIR = path.resolve("docs");
 const OUTPUT = path.resolve("docs/.vitepress/metadata.json");
-const IGNORE_DIRS = new Set(['.vitepress', 'public', 'assets', '.git']);
+const IGNORE_DIRS = new Set(['.vitepress', 'public', 'img', '.git']);
 const IGNORE_FILENAMES = new Set(['index.md', 'README.md', 'metadata.json']);
 
 console.log(`✅ IGNORE_DIRS = ${JSON.stringify(IGNORE_DIRS, null, 2)}`);
@@ -90,50 +90,50 @@ console.log(`✅ metadata = ${JSON.stringify(metadata, null, 2)}`);
 fs.writeFileSync(OUTPUT, JSON.stringify(metadata, null, 2));
 console.log(`✅ ${OUTPUT} 已生成，共 ${articles.length} 篇文章`);
 
-const categories = Object.keys(categoryStats || {}).filter(cat => cat && cat.trim());
-if (categories.length === 0) {
-  console.warn('⚠️ No valid categories found in metadata.json');
-  process.exit(0);
-}
+// const categories = Object.keys(categoryStats || {}).filter(cat => cat && cat.trim());
+// if (categories.length === 0) {
+//   console.warn('⚠️ No valid categories found in metadata.json');
+//   process.exit(0);
+// }
 
-let generatedCount = 0;
-for (const cat of categories) {
-  const safeCat = cat.trim();
-  if (!safeCat) continue;
+// let generatedCount = 0;
+// for (const cat of categories) {
+//   const safeCat = cat.trim();
+//   if (!safeCat) continue;
 
-  const categoryDir = path.join(DOCS_DIR, safeCat);
+//   const categoryDir = path.join(DOCS_DIR, safeCat);
 
-  // 如果分类目录不存在，跳过（理论上不应发生）
-  if (!fs.existsSync(categoryDir)) {
-    console.warn(`⚠️ Skipping category "${safeCat}": directory not found.`);
-    continue;
-  }
+//   // 如果分类目录不存在，跳过（理论上不应发生）
+//   if (!fs.existsSync(categoryDir)) {
+//     console.warn(`⚠️ Skipping category "${safeCat}": directory not found.`);
+//     continue;
+//   }
 
-  const indexPath = path.join(categoryDir, 'index.md');
+//   const indexPath = path.join(categoryDir, 'index.md');
 
-  let shouldWrite = true;
+//   let shouldWrite = true;
 
-  // 如果 index.md 已存在，检查是否为自动生成
-  // if (fs.existsSync(indexPath)) {
-  //   const content = fs.readFileSync(indexPath, 'utf8');
-  //   if (!content.includes(AUTO_COMMENT)) {
-  //     console.warn(`⚠️ Skipped ${indexPath} (exists and not auto-generated).`);
-  //     shouldWrite = false;
-  //   }
-  // }
+//   // 如果 index.md 已存在，检查是否为自动生成
+//   // if (fs.existsSync(indexPath)) {
+//   //   const content = fs.readFileSync(indexPath, 'utf8');
+//   //   if (!content.includes(AUTO_COMMENT)) {
+//   //     console.warn(`⚠️ Skipped ${indexPath} (exists and not auto-generated).`);
+//   //     shouldWrite = false;
+//   //   }
+//   // }
 
-  if (!shouldWrite) continue;
+//   if (!shouldWrite) continue;
 
-  // 生成简洁的 frontmatter-only index.md
-  const content = `---
-layout: CategoryPage
-category: ${safeCat}
----
-`;
+//   // 生成简洁的 frontmatter-only index.md
+//   const content = `---
+// layout: CategoryPage
+// category: ${safeCat}
+// ---
+// `;
 
-  fs.writeFileSync(indexPath, content, 'utf8');
-  console.log(`✅ Generated: ${indexPath}`);
-  generatedCount++;
-}
+//   fs.writeFileSync(indexPath, content, 'utf8');
+//   console.log(`✅ Generated: ${indexPath}`);
+//   generatedCount++;
+// }
 
-console.log(`\n✨ Successfully generated index.md for ${generatedCount} categories.`);
+// console.log(`\n✨ Successfully generated index.md for ${generatedCount} categories.`);
