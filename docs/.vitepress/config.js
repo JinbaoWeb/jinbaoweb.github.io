@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import mathjax3 from "markdown-it-mathjax3";
 const customElements = [
 	"math","maction","maligngroup","malignmark","menclose","merror","mfenced","mfrac","mi","mlongdiv","mmultiscripts",
@@ -9,7 +11,15 @@ const customElements = [
 	"mlongdiv","mscarries","mscarry","msgroup","msline","msrow","mstack","maction","semantics","annotation",
 	"annotation-xml","mjx-container","mjx-assistive-mml",
 ];
-
+// 读取 metadata.json（确保它已由 generateMeta.js 生成）
+const metaPath = path.resolve(__dirname, '../.vitepress/metadata.json');
+console.log('获取到 metaPath:', metaPath)
+let metadata = {};
+if (fs.existsSync(metaPath)) {
+  metadata = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+} else {
+  console.warn('⚠️ ${metaPath} not found. Nav will fallback to static list.');
+}
 
 export default {
   title: "JinbaoWeb",
@@ -27,7 +37,8 @@ export default {
     ],
     footer: {
       copyright: 'Copyright © 2017-present Jinbao'
-    }
+    },
+	metadata: metadata
   },
   markdown: {
     config: (md) => {
