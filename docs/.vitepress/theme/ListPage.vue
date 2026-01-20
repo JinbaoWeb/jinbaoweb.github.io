@@ -35,7 +35,7 @@ const topics = frontmatter.value.topics || []
 
 <style>
     .topic {
-      margin-bottom: 50px;
+      margin-top: 50px;
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
