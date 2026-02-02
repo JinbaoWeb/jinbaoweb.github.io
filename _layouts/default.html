@@ -6,14 +6,42 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            }
-        };
-    </script>
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    "HTML-CSS": {
+      linebreaks: { automatic: true },
+      scale: 100
+    },
+    CommonHTML: {
+      linebreaks: { automatic: true }
+    },
+    SVG: {
+      linebreaks: { automatic: true }
+    }
+  });
+  
+  // 关键部分：为 displayMath 添加包装
+  MathJax.Hub.Register.StartupHook("End", function () {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i++) {
+      if (all[i].display) {
+        var parent = all[i].SourceElement().parentNode;
+        if (parent && parent.nodeName !== "DIV") {
+          var wrapper = document.createElement("div");
+          wrapper.className = "math-wrapper";
+          parent.replaceChild(wrapper, all[i].SourceElement());
+          wrapper.appendChild(all[i].SourceElement());
+        }
+      }
+    }
+  });
+</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
