@@ -5,3 +5,5 @@ describe:
 
 theme: jekyll-theme-cayman
 markdown: kramdown
+kramdown:
+  syntax_highlighter: nil
