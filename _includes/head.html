@@ -5,14 +5,22 @@
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script type="text/x-mathjax-config">
+       MathJax.Hub.Config({
+           tex2jax: {
+               inlineMath: [['$', '$'], ['\\(', '\\)']],
+               displayMath: [['$$', '$$'], ['\\[', '\\]']]
+           }
+       });
+    </script>
     <script type="text/javascript" async
        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS_HTML">
     </script>
-    <script type="text/x-mathjax-config">
+    <!-- <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             tex2jax: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']]
             }
         });
-    </script>
+    </script> -->
   </head>
