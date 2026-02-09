@@ -1,3 +1,6 @@
 title: Jinbao
 author: Jinbao Dong
 email: jinbaosite@163.com
+
+theme: jekyll-theme-cayman
+markdown: kramdown
