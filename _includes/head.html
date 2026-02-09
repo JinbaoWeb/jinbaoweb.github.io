@@ -4,15 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- 数学公式 -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } }, messageStyle: "none", SVG: { blacker: 1 }});
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script type="text/javascript" async
+       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS_HTML">
     </script>
-    <style>
-        /* 论文基础样式 */
-        body {
-            font-family: "Times New Roman", Times, serif;
-        }
-    </style>
+    <script type="text/x-mathjax-config">
+       MathJax.Hub.Config({
+           tex2jax: {
+               inlineMath: [['$', '$'], ['\(', '\)']],
+               displayMath: [['$$', '$$'], ['\[', '\]']]
+           }
+       });
+    </script>
   </head>
