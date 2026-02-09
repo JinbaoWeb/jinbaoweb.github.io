@@ -7,4 +7,6 @@ theme: jekyll-theme-cayman
 markdown: kramdown
 kramdown:
   syntax_highlighter: nil
-  math_engine: nil
+  math_engine: null
+  # 强制关闭所有数学解析相关的属性
+  math_engine_opts: {}
