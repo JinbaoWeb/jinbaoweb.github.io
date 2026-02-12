@@ -61,6 +61,7 @@ nav ul li a:hover {
     max-width: 840px;
     margin: 0 auto;
     padding: 6rem 1rem;
+    line-height: 1.5;
 }
 
 /* --- 响应式处理 --- */
