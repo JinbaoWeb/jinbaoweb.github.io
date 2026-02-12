@@ -4,12 +4,10 @@
     box-sizing: border-box;
     font-family: "Times New Roman", Times, serif;
 }
-header {
-    background: #1a1a1a;
-}
 nav {
+    background: #1a1a1a;
     height: 70px;
-    max-width: 840px;
+    max-width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between; /* 初始状态：Logo左，UL右 */
