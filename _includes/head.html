@@ -6,12 +6,28 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <script type="text/x-mathjax-config">
-       MathJax.Hub.Config({
-           tex2jax: {
-               inlineMath: [['$', '$'], ['\\(', '\\)']],
-               displayMath: [['$$', '$$'], ['\\[', '\\]']]
-           }
-       });
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']],
+          displayMath: [['$$','$$'], ['\\[','\\]']],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        },
+        TeX: {
+          equationNumbers: { autoNumber: "AMS" },
+          Macros: {
+            RR: "{\\mathbb R}"
+          }
+        },
+        "HTML-CSS": { 
+          fonts: ["TeX"],
+          scale: 90
+        },
+        SVG: {
+          font: "Neo-Euler"   // 自定义字体
+        },
+        showProcessingMessages: false
+      });
     </script>
     <script type="text/javascript" async
        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS_HTML">
