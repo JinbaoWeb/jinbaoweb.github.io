@@ -78,7 +78,8 @@ nav ul li a:hover {
 }
 
 .main-content ul, .main-content ol {
-    margin-top: 0
+    margin-top: 0;
+    padding-left: 40px;
 }
 
 /* --- 响应式处理 --- */
