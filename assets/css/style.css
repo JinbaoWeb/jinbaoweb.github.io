@@ -68,6 +68,7 @@ nav ul li a:hover {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
+    text-align: center;
 }
 
 /* --- 响应式处理 --- */
