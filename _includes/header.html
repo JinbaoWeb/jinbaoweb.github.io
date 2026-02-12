@@ -1,14 +1,17 @@
-    <nav class="nav-header">
-        <div class="logo"><a href="/">{{ site.title }}</a></div>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">{{ site.title }}</div>
+            
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <span>☰</span>
+            </label>
+
+            <ul class="nav-links">
+                {% for menus in site.data.menus %}
+                <li><a href="{{ menus.url }}">{{ menus.title }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
-        <ul class="nav-links">
-            {% for menus in site.data.menus %}
-            <li><a href="{{ menus.url }}">{{ menus.title }}</a></li>
-            {% endfor %}
-        </ul>
     </nav>
       
