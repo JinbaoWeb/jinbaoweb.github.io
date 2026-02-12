@@ -57,6 +57,12 @@ nav ul li a:hover {
     display: none; /* 桌面端隐藏 */
 }
 
+.main-content {
+    max-width: 840px;
+    margin: 0 auto;
+    padding:2rem 1rem;
+}
+
 /* --- 响应式处理 --- */
 @media (max-width: 858px) {
     .checkbtn {
