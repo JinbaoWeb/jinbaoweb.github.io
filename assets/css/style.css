@@ -97,6 +97,13 @@ nav ul li a:hover {
     padding-left: 15px;
 }
 
+.site-footer {
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: solid 1px #eff0f1;
+    text-align: center;
+}
+
 /* --- 响应式处理 --- */
 @media (max-width: 858px) {
     .checkbtn {
