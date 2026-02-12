@@ -1,17 +1,16 @@
-    <nav>
-        <div class="nav-container">
-            <div class="logo">{{ site.title }}</div>
-            
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <span>☰</span>
-            </label>
 
-            <ul class="nav-links">
-                {% for menus in site.data.menus %}
-                <li><a href="{{ menus.url }}">{{ menus.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+    <nav>
+        <input type="checkbox" id="check">
+        
+        <div class="logo">{{ site.title }}</div>
+
+        <label for="check" class="checkbtn">
+            <span>☰</span>
+        </label>
+
+        <ul>
+            {% for menus in site.data.menus %}
+            <li><a href="{{ menus.url }}">{{ menus.title }}</a></li>
+            {% endfor %}
+        </ul>
     </nav>
-      
