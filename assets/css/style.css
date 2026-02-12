@@ -6,20 +6,16 @@
 }
 
 nav {
-    background: #2c3e50;
+    background: #1a1a1a;
+    height: 70px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 初始状态：Logo左，UL右 */
+    padding: 0 5%;
     position: fixed;
     top: 0;
     z-index: 1000;
-}
-
-/* 导航条容器 */
-.nav-container {
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
 }
 
 .logo {
@@ -28,16 +24,19 @@ nav {
     font-weight: bold;
 }
 
-/* 桌面端菜单 */
 nav ul {
     display: flex;
     list-style: none;
 }
 
+nav ul li {
+    margin-left: 20px;
+}
+
 nav ul li a {
     color: #ddd;
     text-decoration: none;
-    padding: 10px 20px;
+    font-size: 16px;
     transition: 0.3s;
 }
 
@@ -50,62 +49,46 @@ nav ul li a:hover {
     display: none;
 }
 
-/* 汉堡按钮 */
+/* 汉堡按钮样式 */
 .checkbtn {
-    font-size: 30px;
+    font-size: 28px;
     color: white;
     cursor: pointer;
-    display: none;
+    display: none; /* 桌面端隐藏 */
 }
 
-@media screen and (min-width: 64em) {
-    .main-content {
-        max-width: 840px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-    }
-}
-
-@media screen and (min-width: 42em) and (max-width: 64em) {
-    .main-content {
-        padding: 2rem 1rem;
-    }
+/* --- 响应式处理 --- */
+@media (max-width: 858px) {
     .checkbtn {
         display: block;
+        order: 2; /* 核心：让按钮在视觉上排在后面（右侧） */
+    }
+    .logo {
+        order: 1; /* 核心：让Logo排在前面（左侧） */
     }
 
-    /* 菜单改为纵向且初始高度为 0 */
     nav ul {
-        display: block;
+        position: fixed;
         width: 100%;
-        background: #34495e;
-        max-height: 0; /* 核心：初始高度为0 */
-        overflow: hidden; /* 核心：超出部分隐藏 */
-        transition: max-height 0.4s ease-in-out; /* 核心：高度过渡动画 */
+        height: 100vh;
+        background: #262626;
+        top: 70px;
+        left: -100%;
         text-align: center;
-    }
-
-    /* 当勾选复选框时，赋予足够大的高度实现展开 */
-    #check:checked ~ ul {
-        max-height: 400px; /* 设置一个大于菜单实际高度的值 */
+        flex-direction: column;
+        transition: all 0.4s ease-in-out;
     }
 
     nav ul li {
-        width: 100%;
-        border-top: 1px solid rgba(255,255,255,0.1);
+        margin: 30px 0;
     }
 
     nav ul li a {
-        display: block;
-        padding: 20px 0;
-        font-size: 18px;
+        font-size: 20px;
+    }
+
+    /* 展开菜单 */
+    #check:checked ~ ul {
+        left: 0;
     }
 }
-
-@media screen and (max-width: 42em) {
-    .main-content {
-        padding: 2rem 1rem;
-    }
-}
-
-
