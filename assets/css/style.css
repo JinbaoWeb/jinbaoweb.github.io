@@ -60,7 +60,7 @@ nav ul li a:hover {
 .main-content {
     max-width: 840px;
     margin: 0 auto;
-    padding:2rem 1rem;
+    padding: 6rem 1rem;
 }
 
 /* --- 响应式处理 --- */
