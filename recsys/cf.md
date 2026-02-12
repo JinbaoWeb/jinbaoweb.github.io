@@ -52,8 +52,6 @@ def Recommand(user, train, W, K):
     return rank
 ```
 
----
-
 ## 02 基于物品的协同过滤算法（ItemCF）
 
 ### 2.1 ItemCF的算法流程
