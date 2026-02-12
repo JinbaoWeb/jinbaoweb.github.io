@@ -4,3 +4,14 @@ email: jinbaosite@163.com
 
 theme: jekyll-theme-cayman
 markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge            # 可选 rouge, coderay, nil
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true              # 显示行号
+      start_line: 1                  # 起始行号
+      class_prefix: 'highlight-'     # 给 span 添加前缀
+      css_class: 'codehilite'        # 代码块外层 div 类名
+    span:
+      css_class: 'highlight'
+  input: GFM
