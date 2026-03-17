@@ -10,18 +10,18 @@ site:
 # 导航菜单配置
 nav_menu:
   - name: "首页"
-    href: "index.html"
+    href: "/"
     is_home: true
   - name: "推荐算法"
-    href: "rec-sys"
+    href: "/recsys"
   - name: "机器学习"
-    href: "ml"
+    href: "/ml"
   - name: "深度学习"
-    href: "dl"
+    href: "/dl"
   - name: "Agent"
-    href: "agent"
+    href: "/agent"
   - name: "GitHub"
-    href: "https://github.com"
+    href: "https://github.com/jinbaoweb"
     external: true
   - name: "关于"
     href: "#about"
