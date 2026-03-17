@@ -11,18 +11,24 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # 必须添加下面这两行
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
     steps:
       - name: Checkout content
         uses: actions/checkout@v4
 
-      # 调用你的工具仓库（替换为你的用户名/仓库名）
+      # 调用你的模板仓库
       - name: Convert Markdown to HTML
         uses: JinbaoWeb/python-html@main 
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './output' # 转换后的文件存放目录
+          path: './output' # 确保你的 convert.py 把结果生成到了这个目录
 
       - name: Deploy to GitHub Pages
+        id: deployment # 添加 ID 以便上面 environment 获取 url
         uses: actions/deploy-pages@v4
