@@ -1,0 +1,53 @@
+# 博客配置文件
+
+# 网站基本信息
+site:
+  title: "Jinbao"
+  subtitle: "技术与思考"
+  author: "Jinbao"
+  description: "专注于推荐系统、机器学习与深度学习的个人博客"
+
+# 导航菜单配置
+nav_menu:
+  - name: "首页"
+    href: "index.html"
+    is_home: true
+  - name: "推荐算法"
+    href: "rec-sys"
+  - name: "机器学习"
+    href: "ml"
+  - name: "深度学习"
+    href: "dl"
+  - name: "Agent"
+    href: "agent"
+  - name: "GitHub"
+    href: "https://github.com"
+    external: true
+  - name: "关于"
+    href: "#about"
+
+# Hero 区域配置
+hero:
+  title: "你好，我是 {author}"
+  subtitle: "推荐算法 | 机器学习 | 深度学习 | Agent"
+  bio: |
+    专注于推荐系统算法研究与实践。
+    热爱机器学习与深度学习。
+    在这里记录学习笔记与技术思考。
+
+# 社交链接
+social:
+  - name: "GitHub"
+    url: "https://github.com"
+    icon: "github"
+  - name: "Twitter"
+    url: "https://twitter.com"
+    icon: "twitter"
+  - name: "Email"
+    url: "mailto:hello@example.com"
+    icon: "email"
+
+# 页脚配置
+footer:
+  copyright: "© 2026 {author}. All rights reserved."
+  built_with: "Built with love using HTML, CSS & JavaScript"
